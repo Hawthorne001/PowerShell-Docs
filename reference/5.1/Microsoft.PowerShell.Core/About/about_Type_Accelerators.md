@@ -4,11 +4,11 @@ Locale: en-US
 ms.date: 08/30/2023
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_type_accelerators?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Type Accelerators
+title: about_Type_Accelerators
 ---
 # about_Type_Accelerators
 
-## SHORT DESRIPTION
+## SHORT DESCRIPTION
 Describes the Type accelerators available for .NET framework classes
 
 ## Long description

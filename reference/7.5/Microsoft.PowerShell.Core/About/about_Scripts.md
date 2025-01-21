@@ -4,11 +4,12 @@ Locale: en-US
 ms.date: 10/06/2020
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_scripts?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Scripts
+title: about_Scripts
 ---
 # about_Scripts
 
 ## Short description
+
 Describes how to run and write scripts in PowerShell.
 
 ## Long description
@@ -151,8 +152,8 @@ running on the current system and saves them to a log file. The log filename is
 created from the current date.
 
 ```powershell
-$date = (get-date).dayofyear
-get-service | out-file "$date.log"
+$date = (Get-Date).DayOfYear
+Get-Service | Out-File "$date.log"
 ```
 
 To create this script, open a text editor or a script editor, type these
@@ -181,7 +182,7 @@ param ($ComputerName = $(throw "ComputerName parameter is required."))
 
 function CanPing {
    $error.clear()
-   $tmp = test-connection $computername -erroraction SilentlyContinue
+   $tmp = Test-Connection $computername -ErrorAction SilentlyContinue
 
    if (!$?)
        {write-host "Ping failed: $ComputerName."; return $false}
@@ -190,7 +191,7 @@ function CanPing {
 }
 
 function CanRemote {
-    $s = new-pssession $computername -erroraction SilentlyContinue
+    $s = New-PSSession $computername -ErrorAction SilentlyContinue
 
     if ($s -is [System.Management.Automation.Runspaces.PSSession])
         {write-host "Remote test succeeded: $ComputerName."}

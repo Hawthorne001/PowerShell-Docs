@@ -62,7 +62,7 @@ $objectEventArgs = @{
 }
 Register-ObjectEvent @objectEventArgs
 $Timer.Interval = 2000
-$Timer.Autoreset = $False
+$Timer.AutoReset = $False
 $Timer.Enabled = $True
 Wait-Event Timer.Elapsed
 ```
@@ -164,4 +164,3 @@ current session, the event queue is discarded and the event subscription is canc
 [Unregister-Event](Unregister-Event.md)
 
 [Wait-Event](Wait-Event.md)
-

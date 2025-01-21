@@ -558,14 +558,14 @@ $xmlQuery = @'
 <QueryList>
   <Query Id="0" Path="Windows PowerShell">
     <Select Path="System">*[System[(Level=3) and
-        TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]</Select>
+        TimeCreated[timediff(@SystemTime) &amp;lt;= 86400000]]]</Select>
   </Query>
 </QueryList>
 '@
 Get-WinEvent -FilterXML $xmlQuery
 
 # Using the FilterXPath parameter:
-$XPath = '*[System[Level=3 and TimeCreated[timediff(@SystemTime) &lt;= 86400000]]]'
+$XPath = '*[System[Level=3 and TimeCreated[timediff(@SystemTime) &amp;lt;= 86400000]]]'
 Get-WinEvent -LogName 'Windows PowerShell' -FilterXPath $XPath
 ```
 
@@ -596,7 +596,7 @@ that occurred within the last week.
 ```powershell
 $StartTime = (Get-Date).AddDays(-7)
 Get-WinEvent -FilterHashtable @{
-  Logname='Application'
+  LogName='Application'
   ProviderName='Application Error'
   Data='iexplore.exe'
   StartTime=$StartTime
@@ -842,7 +842,7 @@ cmdlet.
 > PowerShell does not limit the amount of logs you can request. However, the `Get-WinEvent` cmdlet
 > queries the Windows API which has a limit of 256. This can make it difficult to filter through all
 > of your logs at one time. You can work around this by using a `foreach` loop to iterate through each
-> log like this: `Get-WinEvent -ListLog * | ForEach-Object{ Get-WinEvent -LogName $_.Logname }`
+> log like this: `Get-WinEvent -ListLog * | ForEach-Object{ Get-WinEvent -LogName $_.LogName }`
 
 ```yaml
 Type: System.String[]

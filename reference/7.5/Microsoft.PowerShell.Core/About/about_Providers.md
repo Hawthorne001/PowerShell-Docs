@@ -4,11 +4,12 @@ Locale: en-US
 ms.date: 08/29/2022
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_providers?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Providers
+title: about_Providers
 ---
 # about_Providers
 
 ## Short description
+
 Describes how PowerShell providers provide access to data and components that
 wouldn't otherwise be easily accessible at the command line. The data is
 presented in a consistent format that resembles a file system drive.
@@ -232,7 +233,7 @@ drive:\location\child-location\...
 ```
 
 For example, to change your location to the `HKLM\Software` registry key, type
-a `Set-Location `command, such as:
+a `Set-Location` command, such as:
 
 ```powershell
 Set-Location HKLM:\SOFTWARE\

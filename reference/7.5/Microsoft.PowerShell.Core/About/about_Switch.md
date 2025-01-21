@@ -4,11 +4,12 @@ Locale: en-US
 ms.date: 02/28/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_switch?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Switch
+title: about_Switch
 ---
 # about_Switch
 
 ## Short description
+
 Explains how to use a switch to handle multiple `if` statements.
 
 ## Long description

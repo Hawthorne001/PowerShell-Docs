@@ -1,6 +1,6 @@
 ---
 description: Lists the currently available experimental features and how to use them.
-ms.date: 02/23/2024
+ms.date: 09/24/2024
 title: Using Experimental Features in PowerShell
 ---
 # Using Experimental Features in PowerShell
@@ -15,14 +15,14 @@ breaking changes.
 > [!CAUTION]
 > Experimental features aren't intended to be used in production since the changes are allowed to be
 > breaking. Experimental features aren't officially supported. However, we appreciate any feedback
-> and bug reports. You can file issues in the [GitHub source repository][25].
+> and bug reports. You can file issues in the [GitHub source repository][26].
 
 For more information about enabling or disabling these features, see
 [about_Experimental_Features][06].
 
 ## Experimental feature lifecycle
 
-The [Get-ExperimentalFeature][29] cmdlet returns all experimental features available to PowerShell.
+The [Get-ExperimentalFeature][30] cmdlet returns all experimental features available to PowerShell.
 Experimental features can come from modules or the PowerShell engine. Module-based experimental
 features are only available after you import the module. In the following example, the
 **PSDesiredStateConfiguration** isn't loaded, so the `PSDesiredStateConfiguration.InvokeDscResource`
@@ -40,10 +40,11 @@ PSCommandWithArgs                  False PSEngine Enable `-CommandWithArgs` para
 PSFeedbackProvider                  True PSEngine Replace the hard-coded suggestion framework with …
 PSLoadAssemblyFromNativeCode       False PSEngine Expose an API to allow assembly loading from nati…
 PSModuleAutoLoadSkipOfflineFiles    True PSEngine Module discovery will skip over files that are ma…
+PSSerializeJSONLongEnumAsNumber     True PSEngine Serialize enums based on long or ulong as an nume…
 PSSubsystemPluginModel              True PSEngine A plugin model for registering and un-registering…
 ```
 
-Use the [Enable-ExperimentalFeature][28] and [Disable-ExperimentalFeature][27] cmdlets to enable or
+Use the [Enable-ExperimentalFeature][29] and [Disable-ExperimentalFeature][28] cmdlets to enable or
 disable a feature. You must start a new PowerShell session for this change to be in effect. Run the
 following command to enable the `PSCommandNotFoundSuggestion` feature:
 
@@ -81,20 +82,22 @@ Legend
 - The ![Discontinued][03] icon indicates the version of PowerShell where the experimental feature
   was removed
 
-|                        Name                         |         7.2         |         7.3         |         7.4         |    7.5 (preview)    |
-| --------------------------------------------------- | :-----------------: | :-----------------: | :-----------------: | :-----------------: |
-| [PSCommandNotFoundSuggestion][10]                   | ![Experimental][02] | ![Experimental][02] | ![Experimental][02] | ![Experimental][02] |
-| [PSDesiredStateConfiguration.InvokeDscResource][14] | ![Experimental][02] | ![Experimental][02] | ![Experimental][02] | ![Experimental][02] |
-| [PSNativePSPathResolution][21]                      | ![Experimental][02] | ![Discontinued][03] |                     |                     |
-| [PSSubsystemPluginModel][23]                        | ![Experimental][02] | ![Experimental][02] | ![Experimental][02] | ![Experimental][02] |
-| [PSNativeCommandArgumentPassing][18]                | ![Experimental][02] |  ![Mainstream][01]  |                     |                     |
-| [PSAnsiRenderingFileInfo][09]                       | ![Experimental][02] |  ![Mainstream][01]  |                     |                     |
-| [PSLoadAssemblyFromNativeCode][16]                  | ![Experimental][02] | ![Experimental][02] | ![Experimental][02] | ![Experimental][02] |
-| [PSNativeCommandErrorActionPreference][19]          |                     | ![Experimental][02] |  ![Mainstream][01]  |                     |
-| [PSFeedbackProvider][15]                            |                     |                     | ![Experimental][02] | ![Experimental][02] |
-| [PSModuleAutoLoadSkipOfflineFiles][17]              |                     |                     | ![Experimental][02] | ![Experimental][02] |
-| [PSCommandWithArgs][11]                             |                     |                     | ![Experimental][02] | ![Experimental][02] |
-| [PSNativeWindowsTildeExpansion][22]                 |                     |                     |                     | ![Experimental][02] |
+|                        Name                         |         7.2         |         7.4         |    7.5 (preview)    |
+| --------------------------------------------------- | :-----------------: | :-----------------: | :-----------------: |
+| [PSCommandNotFoundSuggestion][10]                   | ![Experimental][02] | ![Experimental][02] |  ![Mainstream][01]  |
+| [PSDesiredStateConfiguration.InvokeDscResource][14] | ![Experimental][02] | ![Experimental][02] | ![Experimental][02] |
+| [PSNativePSPathResolution][21]                      | ![Experimental][02] |                     |                     |
+| [PSSubsystemPluginModel][23]                        | ![Experimental][02] | ![Experimental][02] | ![Experimental][02] |
+| [PSNativeCommandArgumentPassing][18]                | ![Experimental][02] |                     |                     |
+| [PSAnsiRenderingFileInfo][09]                       | ![Experimental][02] |                     |                     |
+| [PSLoadAssemblyFromNativeCode][16]                  | ![Experimental][02] | ![Experimental][02] | ![Experimental][02] |
+| [PSNativeCommandErrorActionPreference][19]          |                     |  ![Mainstream][01]  |                     |
+| [PSFeedbackProvider][15]                            |                     | ![Experimental][02] | ![Experimental][02] |
+| [PSModuleAutoLoadSkipOfflineFiles][17]              |                     | ![Experimental][02] |  ![Mainstream][01]  |
+| [PSCommandWithArgs][11]                             |                     | ![Experimental][02] |  ![Mainstream][01]  |
+| [PSNativeWindowsTildeExpansion][22]                 |                     |                     | ![Experimental][02] |
+| [PSRedirectToVariable][24]                          |                     |                     | ![Experimental][02] |
+| [PSSerializeJSONLongEnumAsNumber][25]               |                     |                     | ![Experimental][02] |
 
 ### PSAnsiRenderingFileInfo
 
@@ -114,6 +117,9 @@ For more information, see [about_Automatic_Variables][05].
 
 ### PSCommandNotFoundSuggestion
 
+> [!NOTE]
+> This feature became mainstream in PowerShell 7.5-preview.5.
+
 Recommends potential commands based on fuzzy matching search after a **CommandNotFoundException**.
 
 ```powershell
@@ -130,6 +136,9 @@ gcm, gdr, gcs.
 ```
 
 ### PSCommandWithArgs
+
+> [!NOTE]
+> This feature became mainstream in PowerShell 7.5-preview.5.
 
 This feature enables the `-CommandWithArgs` parameter for `pwsh`. This parameter allows you to
 execute a PowerShell command with arguments. Unlike `-Command`, this parameter populates the `$args`
@@ -190,6 +199,9 @@ Exposes an API to allow assembly loading from native code.
 
 ### PSModuleAutoLoadSkipOfflineFiles
 
+> [!NOTE]
+> This feature became mainstream in PowerShell 7.5-preview.5.
+
 With this feature enabled, if a user's **PSModulePath** contains a folder from a cloud provider,
 such as OneDrive, PowerShell no longer triggers the download of all files contained within that
 folder. Any file marked as not downloaded are skipped. Users who use cloud providers to sync their
@@ -212,7 +224,7 @@ a native executable.
 > The new behavior is a **breaking change** from current behavior. This may break scripts and
 > automation that work around the various issues when invoking native applications. Historically,
 > quotes must be escaped and it isn't possible to provide empty arguments to a native application.
-> Use the [stop-parsing token][08] (`--%`) or the [`Start-Process`][31] cmdlet to sidestep native
+> Use the [stop-parsing token][08] (`--%`) or the [`Start-Process`][32] cmdlet to sidestep native
 > argument passing when needed.
 
 This feature adds a new `$PSNativeCommandArgumentPassing` preference variable that controls this
@@ -244,7 +256,7 @@ and non-Windows platforms is `Standard`.
 
 > [!NOTE]
 > The following examples use the `TestExe.exe` tool. You can build `TestExe` from the source code.
-> See [TestExe][26] in the PowerShell source repository.
+> See [TestExe][27] in the PowerShell source repository.
 
 New behaviors made available by this change:
 
@@ -271,7 +283,7 @@ New behaviors made available by this change:
 For more examples of the new behavior, see [about_Parsing][07].
 
 PowerShell 7.3 also added the ability to trace parameter binding for native commands. For more
-information, see [Trace-Command][32].
+information, see [Trace-Command][34].
 
 ### PSNativeCommandErrorActionPreference
 
@@ -301,7 +313,7 @@ controls how native commands errors are handled in PowerShell. This allows nativ
 to produce error objects that are added to the PowerShell error stream and may terminate execution
 of the script without extra handling.
 
-`$PSNativeCommandUseErrorActionPreference` is set to `$true` by default. With the preference set to
+`$PSNativeCommandUseErrorActionPreference` is set to `$false` by default. With the preference set to
 `$true` you get the following behavior:
 
 - When `$ErrorActionPreference = 'Stop'`, scripts will break when a native command returns a
@@ -325,6 +337,33 @@ operating system.
 - If the path isn't a PSDrive or `~` (on Windows), then path normalization doesn't occur
 - If the path is in single quotes, then it's not resolved and treated as literal
 
+### PSRedirectToVariable
+
+> [!NOTE]
+> This experimental feature was added in PowerShell 7.5-preview.4.
+
+When enabled, this feature adds support for redirecting to the variable drive. This feature allows
+you to redirect data to a variable using the `variable:name` syntax. PowerShell inspects the target
+of the redirection and if it uses the variable provider it calls `Set-Variable` rather than
+`Out-File`.
+
+The following example shows how to redirect the output of a command to a variable:
+
+```powershell
+. {
+    "Output 1"
+    Write-Warning "Warning, Warning!"
+    "Output 2"
+} 3> variable:warnings
+$warnings
+```
+
+```Output
+Output 1
+Output 2
+WARNING: Warning, Warning!
+```
+
 ### PSSubsystemPluginModel
 
 This feature enables the subsystem plugin model in PowerShell. The feature makes it possible to
@@ -337,7 +376,7 @@ the PSReadLine module to provide custom prediction plugins. In future, **Job**,
 **CommandCompleter**, **Remoting** and other components could be separated into subsystem assemblies
 outside of `System.Management.Automation.dll`.
 
-The experimental feature includes a new cmdlet, [Get-PSSubsystem][30]. This cmdlet is only available
+The experimental feature includes a new cmdlet, [Get-PSSubsystem][31]. This cmdlet is only available
 when the feature is enabled. This cmdlet returns information about the subsystems that are available
 on the system.
 
@@ -364,6 +403,36 @@ This feature only applies to Windows. On non-Windows platforms, tilde expansion 
 
 This feature was added in PowerShell 7.5-preview.2.
 
+### PSSerializeJSONLongEnumAsNumber
+
+This feature enables the cmdlet [ConvertTo-Json][33] to serialize any enum values based on
+`Int64/long` or `UInt64/ulong` as a numeric value rather than the string representation of that enum
+value. This aligns the behavior of enum serialization with other enum base types where the cmdlet
+serializes enums as their numeric value. Use the **EnumsAsStrings** parameter to serialize as the
+string representation.
+
+For example:
+
+```powershell
+# PSSerializeJSONLongEnumAsNumber disabled
+@{
+    Key = [System.Management.Automation.Tracing.PowerShellTraceKeywords]::Cmdlets
+} | ConvertTo-Json
+# { "Key": "Cmdlets" }
+
+# PSSerializeJSONLongEnumAsNumber enabled
+@{
+    Key = [System.Management.Automation.Tracing.PowerShellTraceKeywords]::Cmdlets
+} | ConvertTo-Json
+# { "Key": 32 }
+
+# -EnumsAsStrings to revert back to the old behaviour
+@{
+    Key = [System.Management.Automation.Tracing.PowerShellTraceKeywords]::Cmdlets
+} | ConvertTo-Json -EnumsAsStrings
+# { "Key": "Cmdlets" }
+```
+
 <!-- link references -->
 [01]: ../../media/shared/check-mark-button-2705.svg
 [02]: ../../media/shared/construction-sign-1f6a7.svg
@@ -385,11 +454,14 @@ This feature was added in PowerShell 7.5-preview.2.
 [21]: #psnativepspathresolution
 [22]: #psnativewindowstildeexpansion
 [23]: #pssubsystempluginmodel
-[25]: https://github.com/PowerShell/PowerShell/issues/new/choose
-[26]: https://github.com/PowerShell/PowerShell/tree/master/test/tools/TestExe
-[27]: xref:Microsoft.PowerShell.Core.Disable-ExperimentalFeature
-[28]: xref:Microsoft.PowerShell.Core.Enable-ExperimentalFeature
-[29]: xref:Microsoft.PowerShell.Core.Get-ExperimentalFeature
-[30]: xref:Microsoft.PowerShell.Core.Get-PSSubsystem
-[31]: xref:Microsoft.PowerShell.Management.Start-Process
-[32]: xref:Microsoft.PowerShell.Utility.Trace-Command
+[24]: #psredirecttovariable
+[25]: #psserializejsonlongenumasnumber
+[26]: https://github.com/PowerShell/PowerShell/issues/new/choose
+[27]: https://github.com/PowerShell/PowerShell/tree/master/test/tools/TestExe
+[28]: xref:Microsoft.PowerShell.Core.Disable-ExperimentalFeature
+[29]: xref:Microsoft.PowerShell.Core.Enable-ExperimentalFeature
+[30]: xref:Microsoft.PowerShell.Core.Get-ExperimentalFeature
+[31]: xref:Microsoft.PowerShell.Core.Get-PSSubsystem
+[32]: xref:Microsoft.PowerShell.Management.Start-Process
+[33]: xref:Microsoft.PowerShell.Utility.ConvertTo-Json
+[34]: xref:Microsoft.PowerShell.Utility.Trace-Command

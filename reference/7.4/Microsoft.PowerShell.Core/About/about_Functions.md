@@ -1,10 +1,10 @@
 ---
 description: Describes how to create and use functions in PowerShell.
 Locale: en-US
-ms.date: 03/12/2024
+ms.date: 06/26/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_functions?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Functions
+title: about_Functions
 ---
 
 # about_Functions
@@ -22,7 +22,20 @@ run as if you had typed them at the command prompt.
 Functions can be as simple as:
 
 ```powershell
-function Get-PowerShellProcess { Get-Process PowerShell }
+function Get-PowerShellProcess { Get-Process pwsh }
+```
+
+Once a function is defined, you can use it like the built-in cmdlets. For
+example, to call the newly defined `Get-PowerShellProcess` function:
+
+```powershell
+Get-PowerShellProcess
+```
+
+```Output
+ NPM(K)    PM(M)      WS(M)     CPU(s)      Id  SI ProcessName
+ ------    -----      -----     ------      --  -- -----------
+    110    78.72     172.39      10.62   10936   1 pwsh
 ```
 
 A function can also be as complex as a cmdlet or an application.
@@ -133,7 +146,7 @@ the function receives.
 The automatic variable `$_` or `$PSItem` contains the current object in the
 pipeline for use in the `process` block. The `$input` automatic variable
 contains an enumerator that's only available to functions and script blocks.
-For more information, see [about_Automatic_Variables][15].
+For more information, see [about_Automatic_Variables][05].
 
 - Calling the function at the beginning, or outside of a pipeline, executes the
   `process` block once.
@@ -167,6 +180,8 @@ script cmdlet. Resource cleanup is enforced for the following scenarios:
 1. when the pipeline is halted by `Select-Object -First`
 1. when the pipeline is being stopped by <kbd>Ctrl+c</kbd> or
    `StopProcessing()`
+
+The clean block discards any output that's written to the **Success** stream.
 
 > [!CAUTION]
 > Adding the `clean` block is a breaking change. Because `clean` is parsed as a
@@ -333,6 +348,9 @@ function Get-SmallFiles {
       [PSDefaultValue(Help = '100')]
       $Size = 100
   )
+  Get-ChildItem $HOME | Where-Object {
+    $_.Length -lt $Size -and !$_.PSIsContainer
+  }
 }
 ```
 

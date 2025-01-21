@@ -5,11 +5,12 @@ ms.date: 01/22/2023
 no-loc: [Success, Error, Warning, Verbose, Debug, Information, Progress]
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_output_streams?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Output Streams
+title: about_Output_Streams
 ---
 # about_Output_Streams
 
 ## Short description
+
 Explains the availability and purpose of output streams in PowerShell.
 
 ## Long description

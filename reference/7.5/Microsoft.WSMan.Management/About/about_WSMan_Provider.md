@@ -4,7 +4,7 @@ Locale: en-US
 ms.date: 03/07/2022
 online version: https://learn.microsoft.com/powershell/module/microsoft.wsman.management/about/about_wsman_provider?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about WSMan Provider
+title: about_WSMan_Provider
 ---
 # about_WSMan_Provider
 
@@ -153,7 +153,7 @@ Set-Location -Path  WSMan:\SERVER01
 
 ## Displaying the Contents of the WSMan: Drive
 
-This command uses the `Get-Childitem` cmdlet to display the WS-Management stores
+This command uses the `Get-ChildItem` cmdlet to display the WS-Management stores
 in the Localhost store location.
 
 ```powershell
@@ -162,7 +162,7 @@ Get-ChildItem -path WSMan:\Localhost
 
 If you are in the `WSMan:` drive, you can omit the drive name.
 
-This command uses the `Get-Childitem` cmdlet to display the WS-Management
+This command uses the `Get-ChildItem` cmdlet to display the WS-Management
 stores in the remote computer "SERVER01" store location.
 
 ```powershell

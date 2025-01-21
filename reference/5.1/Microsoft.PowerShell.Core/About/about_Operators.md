@@ -1,10 +1,10 @@
 ---
 description: Describes the operators that are supported by PowerShell.
 Locale: en-US
-ms.date: 02/26/2024
+ms.date: 09/03/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Operators
+title: about_Operators
 ---
 # about_Operators
 
@@ -262,9 +262,13 @@ table. For more information, see [about_Hash_Tables][09].
 ### Call operator `&`
 
 Runs a command, script, or script block. The call operator, also known as the
-"invocation operator", lets you run commands that are stored in variables and
+_invocation operator_, lets you run commands that are stored in variables and
 represented by strings or script blocks. The call operator executes in a child
-scope. For more about scopes, see [about_Scopes][19].
+scope. For more about scopes, see [about_Scopes][19]. You can use this to build
+strings containing the command, parameters, and arguments you need, and then
+invoke the string as if it were a command. The strings that you create must
+follow the same parsing rules as a command that you type at the command line.
+For more information, see [about_Parsing][08].
 
 This example stores a command in a string and executes it using the call
 operator.
@@ -391,9 +395,23 @@ automatic variable `$args` is preserved.
 
 ### Format operator `-f`
 
-Formats strings by using the format method of string objects. Enter the format
-string on the left side of the operator and the objects to be formatted on the
-right side of the operator.
+Provide access to the .NET composite formatting feature. A composite format
+string consists of fixed text intermixed with indexed placeholders, called
+_format items_. These format items correspond to the objects in the list.
+
+Each format item takes the following form and consists of the following
+components:
+
+`{index[,alignment][:formatString]}`
+
+The matching braces (`{` and `}`) are required.
+
+The formatting operation yields a result string that consists of the original
+fixed text intermixed with the string representation of the objects in the
+list. For more information, see [Composite Formatting][02].
+
+Enter the composite format string on the left side of the operator and the
+objects to be formatted on the right side of the operator.
 
 ```powershell
 "{0} {1,-10} {2:N}" -f 1,"hello",[math]::pi
@@ -425,9 +443,6 @@ escape them by doubling the curly braces.
 ```Output
 foo vs. {0}
 ```
-
-For more information, see the [String.Format][01] method and
-[Composite Formatting][02].
 
 ### Index operator `[ ]`
 
@@ -596,13 +611,13 @@ properties and methods of an object, use the Static parameter of the
 - [about_Redirection][18]
 
 <!-- link references -->
-[01]: /dotnet/api/system.string.format
 [02]: /dotnet/standard/base-types/composite-formatting
 [03]: /dotnet/standard/base-types/custom-numeric-format-strings#Specifier0
 [04]: /powershell/scripting/learn/glossary#scalar-value
 [05]: about_Arithmetic_Operators.md
 [06]: about_Assignment_Operators.md
 [07]: about_Comparison_Operators.md
+[08]: about_Parsing.md
 [09]: about_Hash_Tables.md
 [12]: about_Join.md
 [13]: about_logical_operators.md

@@ -1,10 +1,10 @@
 ---
 description: Function
 Locale: en-US
-ms.date: 01/17/2023
+ms.date: 06/10/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_function_provider?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Function Provider
+title: about_Function_Provider
 ---
 # about_Function_Provider
 
@@ -73,7 +73,7 @@ Set-Location C:
 ```
 
 You can also work with the **Function** provider from any other PowerShell
-drive. To reference an function from another location, use the drive name
+drive. To reference a function from another location, use the drive name
 `Function:` in the path.
 
 > [!NOTE]
@@ -161,10 +161,10 @@ in the `Function:` drive, you can omit the drive name.
 
 ## Deleting a function
 
-This command deletes the `more:` function from the current session.
+This command deletes the `more` function from the current session.
 
 ```powershell
-Remove-Item Function:more:
+Remove-Item Function:more
 ```
 
 ## Changing a function

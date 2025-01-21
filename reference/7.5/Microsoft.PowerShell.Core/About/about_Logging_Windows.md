@@ -4,12 +4,13 @@ Locale: en-US
 ms.date: 01/03/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_logging_windows?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Logging Windows
+title: about_Logging_Windows
 ---
 
 # about_Logging_Windows
 
 ## Short description
+
 PowerShell logs internal operations from the engine, providers, and cmdlets to
 the Windows event log.
 
@@ -37,7 +38,7 @@ PowerShell supports configuring two categories of logging:
   ```powershell
   $psrl = Get-Module PSReadLine
   $psrl.LogPipelineExecutionDetails = $true
-  Get-Module PSReadline | Select-Object Name, LogPipelineExecutionDetails
+  Get-Module PSReadLine | Select-Object Name, LogPipelineExecutionDetails
   ```
 
   ```Output

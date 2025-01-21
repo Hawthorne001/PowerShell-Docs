@@ -4,7 +4,7 @@ Locale: en-US
 ms.date: 10/18/2018
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_variable_provider?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Variable Provider
+title: about_Variable_Provider
 ---
 # about_Variable_Provider
 
@@ -103,7 +103,7 @@ Set-Location C:
 ```
 
 You can also work with the **Variable** provider from any other PowerShell
-drive. To reference an variable from another location, use the drive name
+drive. To reference a variable from another location, use the drive name
 `Variable:` in the path.
 
 > [!NOTE]

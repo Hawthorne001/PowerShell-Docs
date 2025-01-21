@@ -233,7 +233,7 @@ Certificates are used in client certificate-based authentication. Certificates c
 only to local user accounts, not domain accounts.
 
 To see the certificate thumbprint, use the `Get-Item` or `Get-ChildItem` command to find the
-certficate in `Cert:\CurrentUser\My`.
+certificate in `Cert:\CurrentUser\My`.
 
 ```yaml
 Type: System.String
@@ -635,7 +635,7 @@ WindowsPowerShell/3.0" with slight variations for each operating system and plat
 
 To test a website with the standard user agent string that is used by most Internet browsers, use
 the properties of the [PSUserAgent](/dotnet/api/microsoft.powershell.commands) class, such as
-Chrome, FireFox, Internet Explorer, Opera, and Safari.
+Chrome, Firefox, Internet Explorer, Opera, and Safari.
 
 ```yaml
 Type: System.String

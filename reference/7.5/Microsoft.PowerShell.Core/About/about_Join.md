@@ -4,11 +4,12 @@ Locale: en-US
 ms.date: 06/09/2017
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_join?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Join
+title: about_Join
 ---
 # about_Join
 
 ## Short description
+
 Describes how the join operator (-join) combines multiple strings into a
 single string.
 

@@ -4,11 +4,12 @@ Locale: en-US
 ms.date: 06/29/2021
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_operator_precedence?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Operator Precedence
+title: about_Operator_Precedence
 ---
 # about_Operator_Precedence
 
 ## Short description
+
 Lists the PowerShell operators in precedence order.
 
 ## Long description

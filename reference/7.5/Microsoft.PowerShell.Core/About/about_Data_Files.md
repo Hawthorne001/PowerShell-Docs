@@ -4,11 +4,12 @@ Locale: en-US
 ms.date: 01/19/2023
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_data_files?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Data Files
+title: about_Data_Files
 ---
 # about_Data_Files
 
 ## Short description
+
 PowerShell data files are used to store arbitrary data using PowerShell syntax.
 
 ## Long description

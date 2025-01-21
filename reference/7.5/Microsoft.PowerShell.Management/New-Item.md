@@ -90,7 +90,7 @@ This command creates a directory named "Logfiles" in the `C:` drive. The **ItemT
 specifies that the new item is a directory, not a file or other file system object.
 
 ```powershell
-New-Item -Path "c:\" -Name "logfiles" -ItemType "directory"
+New-Item -Path "c:\" -Name "Logfiles" -ItemType "directory"
 ```
 
 ### Example 3: Create a profile
@@ -378,11 +378,11 @@ on the current provider you are using.
 
 If your location is in a `FileSystem` drive, the following values are allowed:
 
-- File
-- Directory
-- SymbolicLink
-- Junction
-- HardLink
+- `File`
+- `Directory`
+- `SymbolicLink`
+- `Junction`
+- `HardLink`
 
 > [!NOTE]
 > Creating a `SymbolicLink` type on Windows requires elevation as administrator. However, Windows 10
@@ -391,10 +391,10 @@ If your location is in a `FileSystem` drive, the following values are allowed:
 
 In a `Certificate` drive, these are the values you can specify:
 
-- Certificate Provider
-- Certificate
-- Store
-- StoreLocation
+- `Certificate Provider`
+- `Certificate`
+- `Store`
+- `StoreLocation`
 
 For more information see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
@@ -643,7 +643,7 @@ The cmdlet returns a **FileInfo** object when creating a new file in the filesys
 
 ### System.Management.Automation.AliasInfo
 
-The cmdlet returns a **AliasInfo** object when creating a new alias.
+The cmdlet returns an **AliasInfo** object when creating a new alias.
 
 ### System.Management.Automation.FunctionInfo
 

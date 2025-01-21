@@ -4,11 +4,12 @@ Locale: en-US
 ms.date: 12/07/2023
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_powershell_config?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about PowerShell Config
+title: about_PowerShell_Config
 ---
 # about_PowerShell_Config
 
 ## Short description
+
 Configuration files for PowerShell, replacing Registry configuration.
 
 ## Long description
@@ -267,7 +268,7 @@ For more information on experimental features, see
 This setting controls the behavior of logging for PowerShell modules. The
 setting contains two subkeys:
 
-- `EnableModuleLogging` - to enable session configurations, set the value to
+- `EnableModuleLogging` - to enable module logging, set the value to
   `true`. When enabled, pipeline execution events for members of the specified
   modules are recorded in the PowerShell log files.
 - `ModuleNames` - Specifies the name of the modules that should be logged.

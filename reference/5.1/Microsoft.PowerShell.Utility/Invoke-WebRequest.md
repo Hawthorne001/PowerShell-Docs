@@ -267,7 +267,7 @@ Certificates are used in client certificate-based authentication. Certificates c
 only to local user accounts, not domain accounts.
 
 To see the certificate thumbprint, use the `Get-Item` or `Get-ChildItem` command to find the
-certficate in `Cert:\CurrentUser\My`.
+certificate in `Cert:\CurrentUser\My`.
 
 ```yaml
 Type: System.String
@@ -434,7 +434,7 @@ Specifies the output file for which this cmdlet saves the response body. Enter a
 If you omit the path, the default is the current location.
 
 By default, `Invoke-WebRequest` returns the results to the pipeline. To send the results to a file
-and to the pipeline, use the **Passthru** parameter.
+and to the pipeline, use the **PassThru** parameter.
 
 ```yaml
 Type: System.String
@@ -452,6 +452,11 @@ Accept wildcard characters: False
 
 Indicates that the cmdlet returns the results, in addition to writing them to a file. This parameter
 is valid only when the **OutFile** parameter is also used in the command.
+
+> [!NOTE]
+> When you use the **PassThru** parameter, the output is written to the pipeline but the file is
+> empty. For more information, see
+> [PowerShell Issue #15409](https://github.com/PowerShell/PowerShell/issues/15409).
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -666,7 +671,7 @@ each operating system and platform.
 
 To test a website with the standard user agent string that is used by most Internet browsers, use
 the properties of the [PSUserAgent](/dotnet/api/microsoft.powershell.commands.psuseragent) class,
-such as Chrome, FireFox, InternetExplorer, Opera, and Safari. For example, the following command
+such as Chrome, Firefox, InternetExplorer, Opera, and Safari. For example, the following command
 uses the user agent string for Internet Explorer:
 `Invoke-WebRequest -Uri https://website.com/ -UserAgent ([Microsoft.PowerShell.Commands.PSUserAgent]::InternetExplorer)`
 

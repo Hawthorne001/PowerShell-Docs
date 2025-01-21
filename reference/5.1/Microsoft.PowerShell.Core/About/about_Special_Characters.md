@@ -1,10 +1,10 @@
 ---
 description: Describes the special character sequences that control how PowerShell interprets the next characters in the sequence.
 Locale: en-US
-ms.date: 02/23/2024
+ms.date: 05/06/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_special_characters?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Special Characters
+title: about_Special_Characters
 ---
 
 # about_Special_Characters
@@ -50,6 +50,7 @@ Special parsing tokens:
 | -------- | ------------------------------------------------------ |
 | `--`     | Treat the remaining values as arguments not parameters |
 | `--%`    | Stop parsing anything that follows                     |
+| `~`      | Tilde                                                  |
 
 ## Null (`0)
 
@@ -147,7 +148,7 @@ Column1         Column2         Column3
 ## Vertical tab (`v)
 
 The vertical tab (`` `v ``) character advances to the next vertical tab stop
-and writes the remaining output at that point. The rendering of the the
+and writes the remaining output at that point. The rendering of the
 vertical tab is device and terminal dependent.
 
 ```powershell
@@ -234,7 +235,7 @@ cmd.exe /c echo $HOME --% $HOME
 
 The output shows that the first instance of `$HOME` is interpreted by
 PowerShell so that the value of the variable is passed to `cmd`. The second
-instance of `$HOME` comes after the stop-parsing token, so it is passed as a
+instance of `$HOME` comes after the stop-parsing token, so it's passed as a
 literal string.
 
 ```Output
@@ -243,13 +244,22 @@ C:\Users\username  $HOME
 
 For more information about the stop-parsing token, see [about_Parsing][02].
 
+## Tilde (~)
+
+The tilde character (`~`) has special meaning in PowerShell. When it's used
+with PowerShell commands at the beginning of a path, PowerShell expands the
+tilde character to the user's home directory. If you use the tilde character
+anywhere else in a path, it's treated as a literal character.
+
+For more information about the stop-parsing token, see [about_Parsing][03].
+
 ## See also
 
-- [about_Quoting_Rules][03]
+- [about_Quoting_Rules][04]
 
 <!-- link references -->
 [01]: about_Parsing.md#line-continuation
 [02]: about_Parsing.md#the-stop-parsing-token
-[03]: about_Quoting_Rules.md
-[04]: https://wikipedia.org/wiki/ANSI_escape_code
+[03]: about_Parsing.md#tilde-
+[04]: about_Quoting_Rules.md
 [05]: https://www.microsoft.com/p/windows-terminal/9n0dx20hk701

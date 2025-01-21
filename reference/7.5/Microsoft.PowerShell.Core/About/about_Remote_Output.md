@@ -4,7 +4,7 @@ Locale: en-US
 ms.date: 01/31/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_remote_output?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Remote Output
+title: about_Remote_Output
 ---
 
 # about_Remote_Output
@@ -138,7 +138,7 @@ determines the order in which PowerShell connects to the remote computers.
 However, the results appear in the order that the data is received from the
 remote computers.
 
-You can use the `Sort-Object` cmdlet to sort the results on on the
+You can use the `Sort-Object` cmdlet to sort the results on the
 **PSComputerName**. When you any other property of the object, the results from
 different computers are interspersed interleaved in the output
 

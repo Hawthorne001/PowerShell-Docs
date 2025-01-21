@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.ConsoleHost.dll-help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Host
-ms.date: 01/04/2024
+ms.date: 01/06/2025
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.host/start-transcript?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Start-Transcript
@@ -49,13 +49,13 @@ name:
 
 Starting in Windows PowerShell 5.0, `Start-Transcript` includes the hostname in the generated file
 name of all transcripts. The filename also includes random characters in names to prevent potential
-overwrites or duplication when two or more transcripts are started simultaneously. Including the
+overwrites or duplication when you start two or more transcripts simultaneously. Including the
 computer name is useful if you store your transcripts in a centralized location. The random
 character string prevents guessing of the filename to gain unauthorized access to the file.
 
 When using the **Append** parameter, if the target file doesn't have a Byte Order Mark (BOM)
 `Start-Transcript` defaults to `ASCII` encoding in the target file. This behavior can result in
-improper encoding of mulitbyte characters in the transcript.
+improper encoding of multibyte characters in the transcript.
 
 ## EXAMPLES
 
@@ -73,9 +73,9 @@ This command starts a transcript in the default file location.
 Start-Transcript -Path "C:\transcripts\transcript0.txt" -NoClobber
 ```
 
-This command starts a transcript in the `Transcript0.txt` file in `C:\transcripts`. Since the
-**NoClobber** parameter is used, the command prevents any existing files from being overwritten. If
-the `Transcript0.txt` file already exists, the command fails.
+This command starts a transcript in the `Transcript0.txt` file in `C:\transcripts`. **NoClobber**
+parameter prevents any existing files from being overwritten. If the `Transcript0.txt` file already
+exists, the command fails.
 
 ### Example 3: Start a transcript file with a unique name and store it on a file share
 
@@ -91,7 +91,7 @@ $hostname   = hostname
 $version    = $PSVersionTable.PSVersion.ToString()
 $datetime   = Get-Date -f 'yyyyMMddHHmmss'
 $filename   = "Transcript-${username}-${hostname}-${version}-${datetime}.txt"
-$Transcript = Join-Path -Path $sharepath -ChildPath $filename
+$Transcript = (Join-Path -Path $sharepath -ChildPath $filename).ToString()
 Start-Transcript
 ```
 

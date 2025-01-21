@@ -1,14 +1,15 @@
 ---
 description: Explains how to use `Types.ps1xml` files to extend the types of objects that are used in PowerShell.
 Locale: en-US
-ms.date: 04/30/2021
+ms.date: 08/07/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_types.ps1xml?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Types.ps1xml
+title: about_Types.ps1xml
 ---
 # about_Types.ps1xml
 
 ## Short description
+
 Explains how to use `Types.ps1xml` files to extend the types of objects that
 are used in PowerShell.
 
@@ -216,7 +217,7 @@ For more information about `Update-TypeData`, see
 [Update-TypeData](xref:Microsoft.PowerShell.Utility.Update-TypeData).
 
 ```powershell
-Update-Typedata -PrependPath $PSHOME\MyTypes.ps1xml
+Update-TypeData -PrependPath $PSHOME\MyTypes.ps1xml
 ```
 
 To test the change, run a `Get-ChildItem` command to get the PowerShell.exe
@@ -358,8 +359,9 @@ following:
 For example, the following XML defines the default display of services
 (`System.ServiceProcess.ServiceController` objects) that are returned by the
 `Get-Service` cmdlet. It defines a member set named **PsStandardMembers** that
-consists of a default property set with the **Status**, **Name**, and
-**DisplayName** properties.
+consists of a default property set and a default display property. It defines
+the default property set as the **Status**, **Name**, and **DisplayName**
+properties. It defines the default display property as **Name**.
 
 ```xml
 <Type>
@@ -376,6 +378,10 @@ consists of a default property set with the **Status**, **Name**, and
             <Name>DisplayName</Name>
           </ReferencedProperties>
         </PropertySet>
+        <NoteProperty>
+          <Name>DefaultDisplayProperty</Name>
+          <Value>Name</Value>
+        </NoteProperty>
       </Members>
     </MemberSet>
   </Members>

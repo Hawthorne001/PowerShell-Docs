@@ -1,11 +1,11 @@
 ---
 description: Describes the PowerShell execution policies and explains how to manage them.
 Locale: en-US
-ms.date: 03/04/2024
+ms.date: 10/07/2024
 no-loc: [Bypass, Default, Restricted, Undefined, Unrestricted, Process, Scope, MachinePolicy, about_Group_Policy_Settings]
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Execution Policies
+title: about_Execution_Policies
 ---
 
 # about_Execution_Policies
@@ -268,7 +268,7 @@ policy.
 For example:
 
 ```powershell
-pwsh.exe -ExecutionPolicy AllSigned
+powershell.exe -ExecutionPolicy AllSigned
 ```
 
 The execution policy that you set isn't stored in the registry. Instead, it's
@@ -329,7 +329,7 @@ evaluates the execution policies in the following precedence order:
 ```
 Group Policy: MachinePolicy
 Group Policy: UserPolicy
-Execution Policy: Process (or pwsh.exe -ExecutionPolicy)
+Execution Policy: Process (or powershell.exe -ExecutionPolicy)
 Execution Policy: LocalMachine
 Execution Policy: CurrentUser
 ```
@@ -362,7 +362,7 @@ For more information, see [about_Signing][04],
 > - `Invoke-RestMethod`
 > - `Invoke-WebRequest`
 
-## Execution policy on Windows Server Core and Window Nano Server
+## Execution policy on Windows Server Core and Windows Nano Server
 
 When PowerShell 6 is run on Windows Server Core or Windows Nano Server under
 certain conditions, execution policies can fail with the following error:

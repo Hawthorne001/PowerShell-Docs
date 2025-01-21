@@ -4,11 +4,12 @@ Locale: en-US
 ms.date: 05/13/2020
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_history?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about History
+title: about_History
 ---
 # about_History
 
 ## Short description
+
 Describes how to get and run commands in the command history.
 
 ## Long description
