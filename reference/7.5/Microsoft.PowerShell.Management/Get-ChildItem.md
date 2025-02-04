@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 06/14/2023
+ms.date: 08/09/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-childitem?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-ChildItem
@@ -11,7 +11,6 @@ title: Get-ChildItem
 # Get-ChildItem
 
 ## SYNOPSIS
-
 Gets the items and child items in one or more specified locations.
 
 ## SYNTAX
@@ -124,7 +123,7 @@ as follows:
 - `s` (system)
 
 For more information about the mode flags, see
-[about_Filesystem_Provider](../microsoft.powershell.core/about/about_filesystem_provider.md#attributes-flagsexpression).
+[about_Filesystem_Provider](../Microsoft.PowerShell.Core/About/about_Filesystem_Provider.md#attributes-flagsexpression).
 
 ### Example 2: Get child item names in a directory
 
@@ -152,7 +151,7 @@ This example displays `.txt` files that are located in the current directory and
 subdirectories.
 
 ```powershell
-Get-ChildItem -Path C:\Test\*.txt -Recurse -Force
+Get-ChildItem -Path .\*.txt -Recurse -Force
 ```
 
 ```Output
@@ -191,7 +190,7 @@ Mode                LastWriteTime         Length Name
 
 The `Get-ChildItem` cmdlet uses the **Path** parameter to specify `C:\Test\*.txt`. **Path** uses the
 asterisk (`*`) wildcard to specify all files with the filename extension `.txt`. The **Recurse**
-parameter searches the **Path** directory its subdirectories, as shown in the **Directory:**
+parameter searches the **Path** directory and its subdirectories, as shown in the **Directory:**
 headings. The **Force** parameter displays hidden files such as `hiddenfile.txt` that have a mode of
 **h**.
 
@@ -346,8 +345,8 @@ authority.
 Get-ChildItem -Path Cert:\* -Recurse -CodeSigningCert
 ```
 
-For more information about the Certificate provider and the `Cert:` drive,
-see [about_Certificate_Provider](../Microsoft.PowerShell.Security/About/about_Certificate_Provider.md).
+For more information about the Certificate provider and the `Cert:` drive, see
+[about_Certificate_Provider](../Microsoft.PowerShell.Security/About/about_Certificate_Provider.md).
 
 ### Example 8: Get items using the Depth parameter
 
@@ -437,7 +436,7 @@ filesystem object returned by `Get-ChildItem` and is displayed in the default ou
 
 ```powershell
 PS D:\> New-Item -ItemType Junction -Name tmp -Target $env:TEMP
-PS D:\> Get-ChildItem | Select-Object name,LinkTarget
+PS D:\> Get-ChildItem | Select-Object name, LinkTarget
 
 Name     LinkTarget
 ----     ----------
@@ -508,7 +507,8 @@ The **Attributes** parameter supports the following properties:
 - **System**
 - **Temporary**
 
-For a description of these attributes, see the [FileAttributes Enumeration](/dotnet/api/system.io.fileattributes).
+For a description of these attributes, see the [FileAttributes](xref:System.IO.FileAttributes)
+enumeration.
 
 To combine attributes, use the following operators:
 
@@ -863,7 +863,8 @@ typed. No characters are interpreted as wildcards. If the path includes escape c
 it in single quotation marks. Single quotation marks tell PowerShell to not interpret any characters
 as escape sequences.
 
-For more information, see [about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
+For more information, see
+[about_Quoting_Rules](../Microsoft.PowerShell.Core/About/about_Quoting_Rules.md).
 
 ```yaml
 Type: System.String[]
@@ -1074,7 +1075,7 @@ providers available in your session, type `Get-PSProvider`. For more information
 
 [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md)
 
-[about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md)
+[about_Quoting_Rules](../Microsoft.PowerShell.Core/About/about_Quoting_Rules.md)
 
 [about_Registry_Provider](../Microsoft.PowerShell.Core/About/about_Registry_Provider.md)
 

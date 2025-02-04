@@ -1,10 +1,10 @@
 ---
 description: Describes how to create and use functions in PowerShell.
 Locale: en-US
-ms.date: 03/12/2024
+ms.date: 06/26/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_functions?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Functions
+title: about_Functions
 ---
 
 # about_Functions
@@ -25,6 +25,19 @@ Functions can be as simple as:
 function Get-PowerShellProcess { Get-Process PowerShell }
 ```
 
+Once a function is defined, you can use it like the built-in cmdlets. For
+example, to call the newly defined `Get-PowerShellProcess` function:
+
+```powershell
+Get-PowerShellProcess
+```
+
+```Output
+ NPM(K)    PM(M)      WS(M)     CPU(s)      Id  SI ProcessName
+ ------    -----      -----     ------      --  -- -----------
+    110    78.72     172.39      10.62   10936   1 powershell
+```
+
 A function can also be as complex as a cmdlet or an application.
 
 Like cmdlets, functions can have parameters. The parameters can be named,
@@ -38,8 +51,8 @@ output returned from your function. However, the `return` keyword exits the
 function at that line. For more information, see [about_Return][16].
 
 The function's statement list can contain different types of statement lists
-with the keywords `begin`, `process`, `end`, and `clean`. These statement lists
-handle input from the pipeline differently.
+with the keywords `begin`, `process`, and `end`. These statement lists handle
+input from the pipeline differently.
 
 The [filter][04] keyword is used to create a type of function that runs on each
 object in the pipeline. A filter resembles a function with all its statements
@@ -130,7 +143,7 @@ the function receives.
 The automatic variable `$_` or `$PSItem` contains the current object in the
 pipeline for use in the `process` block. The `$input` automatic variable
 contains an enumerator that's only available to functions and script blocks.
-For more information, see [about_Automatic_Variables][15].
+For more information, see [about_Automatic_Variables][05].
 
 - Calling the function at the beginning, or outside of a pipeline, executes the
   `process` block once.
@@ -138,7 +151,7 @@ For more information, see [about_Automatic_Variables][15].
   that reaches the function.
 - If the pipeline input that reaches the function is empty, the `process` block
   **does not** execute.
-  - The `begin`, `end`, and `clean` blocks still execute.
+  - The `begin` and `end` blocks still execute.
 
 > [!IMPORTANT]
 > If a function parameter is set to accept pipeline input, and a `process`
@@ -308,6 +321,9 @@ function Get-SmallFiles {
       [PSDefaultValue(Help = '100')]
       $Size = 100
   )
+  Get-ChildItem $HOME | Where-Object {
+    $_.Length -lt $Size -and !$_.PSIsContainer
+  }
 }
 ```
 
@@ -451,7 +467,7 @@ function Get-Pipeline
   process {"The value is: $_"}
 }
 
-1,2,4 | Get-Pipeline
+1, 2, 4 | Get-Pipeline
 ```
 
 ```Output
@@ -484,9 +500,9 @@ function Get-SumOfNumbers {
     end { $retValue }
 }
 
-PS> 1,2,3,4 | Get-SumOfNumbers
+PS> 1, 2, 3, 4 | Get-SumOfNumbers
 10
-PS> Get-SumOfNumbers 1,2,3,4
+PS> Get-SumOfNumbers 1, 2, 3, 4
 10
 ```
 
@@ -510,7 +526,7 @@ If this function is run using the pipeline, it displays the following
 results:
 
 ```powershell
-1,2,4 | Get-PipelineBeginEnd
+1, 2, 4 | Get-PipelineBeginEnd
 ```
 
 ```Output
@@ -539,7 +555,7 @@ object at a time. The `$input` automatic variable is empty when the function
 reaches the `end` keyword.
 
 ```powershell
-1,2,4 | Get-PipelineInput
+1, 2, 4 | Get-PipelineInput
 ```
 
 ```Output
@@ -709,7 +725,7 @@ You can write help for a function using either of the two following methods:
 [05]: about_Automatic_Variables.md
 [06]: about_Automatic_Variables.md#using-enumerators
 [07]: about_Comment_Based_Help.md
-[08]: about_Function_provider.md
+[08]: about_Function_Provider.md
 [09]: about_Functions_Advanced_Methods.md
 [10]: about_Functions_Advanced_Parameters.md
 [11]: about_Functions_Advanced.md

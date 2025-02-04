@@ -379,21 +379,21 @@ on the current provider you are using.
 
 If your location is in a `FileSystem` drive, the following values are allowed:
 
-- File
-- Directory
-- SymbolicLink
-- Junction
-- HardLink
+- `File`
+- `Directory`
+- `SymbolicLink`
+- `Junction`
+- `HardLink`
 
 When you create a file using this method, the resulting file is encoded as UTF-8 without a
 byte-order-mark (BOM).
 
 In a `Certificate` drive, these are the values you can specify:
 
-- Certificate Provider
-- Certificate
-- Store
-- StoreLocation
+- `Certificate Provider`
+- `Certificate`
+- `Store`
+- `StoreLocation`
 
 For more information see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
@@ -659,7 +659,7 @@ The cmdlet returns a **FileInfo** object when creating a new file in the filesys
 
 ### System.Management.Automation.AliasInfo
 
-The cmdlet returns a **AliasInfo** object when creating a new alias.
+The cmdlet returns an **AliasInfo** object when creating a new alias.
 
 ### System.Management.Automation.FunctionInfo
 

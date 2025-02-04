@@ -2,7 +2,7 @@
 external help file: System.Management.Automation.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 08/17/2023
+ms.date: 06/07/2024
 no-loc: [Import-Module, -Scope]
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/import-module?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
@@ -311,7 +311,7 @@ TestCmdlets       Script
 ```
 
 ```powershell
-$a = Import-Module -Name Show-Calendar -AsCustomObject -Passthru
+$a = Import-Module -Name Show-Calendar -AsCustomObject -PassThru
 $a | Get-Member
 ```
 
@@ -411,7 +411,7 @@ module runs, instead of the `Get-Date` cmdlet. To run the original version of `G
 qualify the command name with the module name.
 
 For more information about command precedence in PowerShell, see
-[about_Command_Precedence](about/about_Command_Precedence.md).
+[about_Command_Precedence](About/about_Command_Precedence.md).
 
 ### Example 10: Import a minimum version of a module
 
@@ -440,7 +440,7 @@ PowerShellGet 2.1.3
 PowerShellGet 2.1.2
 PowerShellGet 1.0.0.1
 
-PS> Import-Module -FullyQualifiedName @{ModuleName = 'PowerShellGet'; ModuleVersion = '2.1.3' }
+PS> Import-Module -FullyQualifiedName @{ModuleName = 'PowerShellGet'; ModuleVersion = '2.1.3'}
 ```
 
 ### Example 12: Import using a fully qualified path
@@ -603,7 +603,7 @@ Specifies an array of arguments, or parameter values, that are passed to a scrip
 
 You can also refer to the **ArgumentList** parameter by its alias, **args**. For more information
 about the behavior of **ArgumentList**, see
-[about_Splatting](about/about_Splatting.md#splatting-with-arrays).
+[about_Splatting](About/about_Splatting.md#splatting-with-arrays).
 
 ```yaml
 Type: System.Object[]
@@ -783,7 +783,10 @@ Accept wildcard characters: False
 
 ### -Force
 
-This parameter causes a module to be loaded, or reloaded, over top of the current one.
+This parameter causes a module to be loaded, or reloaded, over top of the current one. Some modules
+load external assemblies. The import fails if you are importing a module that loads a newer version
+of an assembly. The **Force** parameter can't override the error. You must start a new session to
+load the new version.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -956,7 +959,7 @@ imported, and you might be missing important members of the module.
 > [!NOTE]
 > While it's possible to import a script (`.ps1`) file as a module, script files are usually not
 > structured like script modules file (`.psm1`) file. Importing a script file doesn't guarantee
-> that it's usable as a module. For more information, see [about_Modules](about/about_Modules.md).
+> that it's usable as a module. For more information, see [about_Modules](About/about_Modules.md).
 
 ```yaml
 Type: System.String[]
@@ -978,8 +981,8 @@ default, `Import-Module` imports all exported module commands.
 Commands that have the same names can hide or replace commands in the session. To avoid command name
 conflicts in a session, use the **Prefix** or **NoClobber** parameters. For more information about
 name conflicts and command precedence, see "Modules and Name Conflicts" in
-[about_Modules](about/about_Modules.md) and
-[about_Command_Precedence](about/about_Command_Precedence.md).
+[about_Modules](About/about_Modules.md) and
+[about_Command_Precedence](About/about_Command_Precedence.md).
 
 This parameter was introduced in Windows PowerShell 3.0.
 
@@ -1337,7 +1340,7 @@ PowerShell includes the following aliases for `Import-Module`:
 
 ## RELATED LINKS
 
-[about_Modules](about/about_Modules.md)
+[about_Modules](About/about_Modules.md)
 
 [Export-ModuleMember](Export-ModuleMember.md)
 

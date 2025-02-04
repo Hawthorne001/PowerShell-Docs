@@ -4,11 +4,12 @@ Locale: en-US
 ms.date: 01/23/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_classes?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Classes
+title: about_Classes
 ---
 # about_Classes
 
 ## Short description
+
 Describes how you can use classes to create your own custom types.
 
 ## Long description
@@ -73,7 +74,7 @@ To instantiate an instance of a class, use one of the following syntaxes:
 > The hashtable syntax only works for classes that have a default constructor
 > that doesn't expect any parameters. It creates an instance of the class with
 > the default constructor and then assigns the key-value pairs to the instance
-> properties. If any key in the hastable isn't a valid property name,
+> properties. If any key in the hashtable isn't a valid property name,
 > PowerShell raises an error.
 
 ## Examples

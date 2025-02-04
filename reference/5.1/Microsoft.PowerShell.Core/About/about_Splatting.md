@@ -4,7 +4,7 @@ Locale: en-US
 ms.date: 01/29/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_splatting?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Splatting
+title: about_Splatting
 ---
 
 # about_Splatting
@@ -69,7 +69,8 @@ table of parameter-name and parameter-value pairs and stores it in the
 variable in a command with splatting. The At symbol (`@HashArguments`) replaces
 the dollar sign (`$HashArguments`) in the command.
 
-To provide a value for the **WhatIf** switch parameter, use `$True` or `$False`.
+To provide a value for the **WhatIf** switch parameter, use `$True` or
+`$False`.
 
 ```powershell
 $HashArguments = @{

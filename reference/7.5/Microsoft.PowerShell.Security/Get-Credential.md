@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Security
-ms.date: 02/26/2024
+ms.date: 05/15/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.security/get-credential?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Credential
@@ -59,7 +59,7 @@ the **Credential** parameter.
 ### Example 2
 
 ```powershell
-$c = Get-Credential -credential User01
+$c = Get-Credential -Credential User01
 $c.Username
 User01
 ```
@@ -73,7 +73,8 @@ object.
 ### Example 3
 
 ```powershell
-$Credential = $host.ui.PromptForCredential("Need credentials", "Please enter your user name and password.", "", "NetBiosUserName")
+$Credential = $host.ui.PromptForCredential(
+    "Need credentials", "Please enter your user name and password.", "", "NetBiosUserName")
 ```
 
 This command uses the **PromptForCredential** method to prompt the user for their user name and
@@ -84,35 +85,42 @@ use **PromptForCredential**, you can specify the caption, messages, and user nam
 prompt.
 
 For more information, see the
-[PromptForCredential](/dotnet/api/system.management.automation.host.pshostuserinterface.promptforcredential)
+[PromptForCredential](xref:System.Management.Automation.Host.PSHostUserInterface.PromptForCredential%2A)
 documentation in the SDK.
 
 ### Example 4
 
-This example shows how to create a credential object that is identical to the object that
-`Get-Credential` returns without prompting the user. This method requires a plain text password,
-which might violate the security standards in some enterprises.
+This example demonstrates how to create a credential object identical to the one returned by
+`Get-Credential`.
 
 ```powershell
 $User = "Domain01\User01"
-$PWord = ConvertTo-SecureString -String "P@sSwOrd" -AsPlainText -Force
-$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
+$PWord = Read-Host -Prompt 'Enter a Password' -AsSecureString
+$credentialParams = @{
+    TypeName = 'System.Management.Automation.PSCredential'
+    ArgumentList = $User, $PWord
+}
+$Credential = New-Object @credentialParams
 ```
 
-The first command saves the user account name in the `$User` parameter. The value must have the
-"Domain\User" or "ComputerName\User" format.
+The first command assigns the username to the `$User` variable. Ensure the value follows
+the "Domain\User" or "ComputerName\User" format.
 
-The second command uses the `ConvertTo-SecureString` cmdlet to create a secure string from a plain
-text password. The command uses the **AsPlainText** parameter to indicate that the string is plain
-text and the **Force** parameter to confirm that you understand the risks of using plain text.
+The second command uses the `Read-Host` cmdlet to create a secure string from user input. The
+**Prompt** parameter requests user input, and the **AsSecureString** parameter masks the input and
+converts it to a secure string.
 
 The third command uses the `New-Object` cmdlet to create a **PSCredential** object from the values
-in the `$User` and `$PWord` variables.
+stored in the `$User` and `$PWord` variables.
 
 ### Example 5
 
 ```powershell
-Get-Credential -Message "Credential are required for access to the \\Server1\Scripts file share." -User Server01\PowerUser
+$credentialParams = @{
+    Message = "Credential are required for access to the \\Server1\Scripts file share."
+    UserName = "Server01\PowerUser"
+}
+Get-Credential @credentialParams
 ```
 
 ```Output
@@ -128,13 +136,14 @@ user why credentials are needed and gives them confidence that the request is le
 ### Example 6
 
 ```powershell
-Invoke-Command -ComputerName Server01 {Get-Credential Domain01\User02}
+Invoke-Command -ComputerName Server01 -ScriptBlock {Get-Credential Domain01\User02}
 ```
 
 ```Output
 PowerShell Credential Request : PowerShell Credential Request
-Warning: This credential is being requested by a script or application on the SERVER01 remote computer.
-Enter your credentials only if you trust the remote computer and the application or script requesting it.
+Warning: This credential is being requested by a script or application on the SERVER01 remote
+computer. Enter your credentials only if you trust the remote computer and the application or script
+requesting it.
 
 Enter your credentials.
 Password for user Domain01\User02: ***************
@@ -163,12 +172,12 @@ this parameter, you're prompted for a user name and a password.
 Starting in PowerShell 3.0, if you enter a user name without a domain, `Get-Credential` no longer
 inserts a backslash before the name.
 
-Credentials are stored in a [PSCredential](/dotnet/api/system.management.automation.pscredential)
-object and the password is stored as a [SecureString](/dotnet/api/system.security.securestring).
+Credentials are stored in a [PSCredential](xref:System.Management.Automation.PSCredential) object
+and the password is stored as a [SecureString](xref:System.Security.SecureString).
 
 > [!NOTE]
 > For more information about **SecureString** data protection, see
-> [How secure is SecureString?](/dotnet/api/system.security.securestring#how-secure-is-securestring).
+> [How secure is SecureString?](xref:System.Security.SecureString#how-secure-is-securestring).
 
 ```yaml
 Type: System.Management.Automation.PSCredential
@@ -269,4 +278,4 @@ and `New-PSDrive` cmdlets.
 
 ## RELATED LINKS
 
-[PromptForCredential](/dotnet/api/system.management.automation.host.pshostuserinterface.promptforcredential)
+[PromptForCredential](xref:System.Management.Automation.Host.PSHostUserInterface.PromptForCredential%2A)

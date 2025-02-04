@@ -122,7 +122,7 @@ This command gets all of the exported files for all available modules.
 
 ```powershell
 $FullyQualifiedName = @{ModuleName="Microsoft.PowerShell.Management";ModuleVersion="3.1.0.0"}
-Get-Module -FullyQualifiedName $FullyQualifiedName | Format-Table -Property Name,Version
+Get-Module -FullyQualifiedName $FullyQualifiedName | Format-Table -Property Name, Version
 ```
 
 ```Output
@@ -201,7 +201,7 @@ in Windows PowerShell 3.0.
 ### Example 6: Group all modules by name
 
 ```powershell
-Get-Module -ListAvailable -All | Format-Table -Property Name, Moduletype, Path -Groupby Name
+Get-Module -ListAvailable -All | Format-Table -Property Name, ModuleType, Path -GroupBy Name
 ```
 
 ```Output
@@ -249,7 +249,7 @@ information about a module, its requirements, and its contents.
 
 ```powershell
 # First command
-$m = Get-Module -list -Name BitsTransfer
+$m = Get-Module -List -Name BitsTransfer
 
 # Second command
 Get-Content $m.Path

@@ -1,10 +1,10 @@
 ---
 description: Describes a keyword that handles a terminating error.
 Locale: en-US
-ms.date: 01/17/2024
+ms.date: 07/05/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_trap?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Trap
+title: about_Trap
 ---
 # about_Trap
 
@@ -231,7 +231,7 @@ At line:5 char:1
     + FullyQualifiedErrorId : CommandNotFoundException
 ```
 
-Because PowerShell doesn't recognize "nonsenseString" as a cmdlet or other
+Because PowerShell doesn't recognize `nonsenseString` as a cmdlet or other
 item, it returns a **CommandNotFoundException** error. The specific `trap`
 statement traps this terminating error.
 
@@ -274,20 +274,21 @@ For example, when a terminating error occurs in an `foreach` statement, the
 
 ```powershell
 trap { 'An error occurred!'}
-foreach ($x in 3..0) {
-   1/$x
-   'after division'
+foreach ($x in 3..-1) {
+       "1/$x = "
+       "`t$(1/$x)"
 }
 'after loop'
 ```
 
 ```Output
-0.333333333333333
-after division
-0.5
-after division
-1
-after division
+1/3 =
+        0.333333333333333
+1/2 =
+        0.5
+1/1 =
+        1
+1/0 =
 An error occurred!
 Attempted to divide by zero.
 At line:3 char:4
@@ -385,8 +386,8 @@ however, the `trap` statement is outside the function. PowerShell doesn't go
 back into the function after the `trap` statement runs.
 
 > [!CAUTION]
-> When multiple traps are defined for the same error condition, the first `trap`
-> defined lexically (highest in the script block) is used.
+> When multiple traps are defined for the same error condition, the first
+> `trap` defined lexically (highest in the script block) is used.
 
 In the following example, only the `trap` with `whoops 1` runs.
 
@@ -447,24 +448,34 @@ The following sample function uses the `continue` keyword in a `trap`
 statement:
 
 ```powershell
-function continue_example {
+function ContinueExample {
     trap {
         'Error trapped'
         continue
     }
-    1/$null
-    'Function completed.'
+    foreach ($x in 3..-1) {
+       "1/$x = "
+       "`t$(1/$x)"
+    }
+    'End of function'
 }
 
-continue_example
+ContinueExample
 ```
 
 ```Output
+1/3 =
+        0.333333333333333
+1/2 =
+        0.5
+1/1 =
+        1
+1/0 =
 Error trapped
-Function completed.
+End of function
 ```
 
-The function resumes after the error is trapped, and the `Function completed`
+The function resumes after the error is trapped, and the `End of function`
 statement runs. No error is written to the error stream.
 
 ## Notes

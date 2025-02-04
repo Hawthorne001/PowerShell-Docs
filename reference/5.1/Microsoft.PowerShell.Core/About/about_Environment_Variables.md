@@ -1,10 +1,10 @@
 ---
 description: Describes how to access and manage environment variables in PowerShell.
 Locale: en-US
-ms.date: 02/05/2024
+ms.date: 09/05/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Environment Variables
+title: about_Environment_Variables
 ---
 # about_Environment_Variables
 
@@ -14,10 +14,10 @@ Describes how to access and manage environment variables in PowerShell.
 Environment variables store data that's used by the operating system and other
 programs. PowerShell creates the following environment variables:
 
-- **PSExecutionPolicyPreference**
-- **PSModulePath**
-- **PSModuleAnalysisCachePath**
-- **PSDisableModuleAnalysisCacheCleanup**
+- `PSExecutionPolicyPreference`
+- `PSModulePath`
+- `PSModuleAnalysisCachePath`
+- `PSDisableModuleAnalysisCacheCleanup`
 
 For full descriptions of these variables, see the
 [PowerShell environment variables][03] of this article.
@@ -62,7 +62,7 @@ environment variables.
 - The Environment provider and Item cmdlets
 - The .NET **System.Environment** class
 
-## Using the variable syntax
+## Use the variable syntax
 
 You can display and change the values of environment variables with the
 following syntax:
@@ -149,7 +149,7 @@ Length Property   int Length {get;}
 
 For more information about variables in PowerShell, see [about_Variables][11].
 
-## Using the Environment provider and Item cmdlets
+## Use the Environment provider and Item cmdlets
 
 PowerShell's **Environment** provider gives you an interface for interacting
 with environment variables in a format that resembles a file system drive. It
@@ -202,10 +202,10 @@ Get-ChildItem Env:
 For more information on using the **Environment** provider to manage
 environment variables, see [about_Environment_Provider][04].
 
-## Using the System.Environment methods
+## Use the System.Environment methods
 
-The **System.Environment** class provides the **GetEnvironmentVariable** and
-**SetEnvironmentVariable** methods to get and modify environment variables.
+The **System.Environment** class provides the `GetEnvironmentVariable()` and
+`SetEnvironmentVariable()` methods to get and modify environment variables.
 
 The following example creates a new environment variable, `Foo`, with a value
 of `Bar` and then returns its value.
@@ -219,7 +219,7 @@ of `Bar` and then returns its value.
 Bar
 ```
 
-You can remove an environment variable with the **SetEnvironmentVariable**
+You can remove an environment variable with the `SetEnvironmentVariable()`
 method by specifying an empty string for the variable's value. For example,
 to remove the `Foo` environment variable:
 
@@ -235,13 +235,16 @@ to remove the `Foo` environment variable:
 For more information about the methods of the **System.Environment** class, see
 [Environment Methods][01].
 
-## Saving changes to environment variables
+## Create persistent environment variables in Windows
 
 On Windows, there are three methods for making a persistent change to an
-environment variable: setting them in your profile, using the
-**SetEnvironmentVariable** method, and using the System Control Panel.
+environment variable:
 
-### Saving environment variables in your profile
+- Set them in your profile
+- Using the `SetEnvironmentVariable()` method
+- Use the System Control Panel
+
+### Set environment variables in your profile
 
 Any environment variable you add or change in your PowerShell profile is
 available in any session that loads your profile. This method works for any
@@ -259,9 +262,9 @@ $Env:Path += ';C:\Tools'
 You can get the path to your PowerShell profile with the `$PROFILE` automatic
 variable. For more information on profiles, see [about_Profiles][07].
 
-### Saving environment variables with SetEnvironmentVariable
+### Set environment variables with SetEnvironmentVariable()
 
-On Windows, you can specify a scope for the **SetEnvironmentVariable** method
+On Windows, you can specify a scope for the `SetEnvironmentVariable()` method
 as the third parameter to set the environment variable in that scope. The
 machine and user scopes both persist outside of the current process, allowing
 you to save a new or changed environment variable.
@@ -280,7 +283,7 @@ setting the variable's value to an empty string.
 [Environment]::SetEnvironmentVariable('Foo', '', 'Machine')
 ```
 
-### Saving environment variables with the System Control Panel
+### Set environment variables in the System Control Panel
 
 In the System Control Panel, you can add or edit existing environment variables
 in the **User** and **System** (Machine) scopes. Windows writes these values to
@@ -305,7 +308,7 @@ preference variables, see [about_Preference_Variables][06].
 
 The environment variables that store preferences include:
 
-- **PSExecutionPolicyPreference**
+- `PSExecutionPolicyPreference`
 
   Stores the execution policy set for the current session. This environment
   variable exists only when you set an execution policy for a single session.
@@ -317,9 +320,13 @@ The environment variables that store preferences include:
   - Use the `Set-ExecutionPolicy` cmdlet. Use the **Scope** parameter with
     a value of `Process`.
 
-    For more information, see [about_Execution_Policies][05].
+  - Manually set the environment variable. Changing the value of this variable
+    changes the execution policy of the current process.
 
-- **PSModulePath**
+  This information only applies to the Windows platform. For more information,
+  see [about_Execution_Policies][05].
+
+- `PSModulePath`
 
   The `$env:PSModulePath` environment variable contains a list of folder
   locations that are searched to find modules and resources.
@@ -345,7 +352,7 @@ The environment variables that store preferences include:
 
   For more information, see [about_PSModulePath][08].
 
-- **PSModuleAnalysisCachePath**
+- `PSModuleAnalysisCachePath`
 
   PowerShell provides control over the file that's used to cache data about
   modules and their cmdlets. The cache is read at startup while searching for a
@@ -364,15 +371,18 @@ The environment variables that store preferences include:
   > is recreated the next time you start PowerShell.
 
   To change the default location of the cache, set the environment variable
-  before starting PowerShell. Changes to this environment variable only affect
-  child processes. The value should name a full path (including filename) that
-  PowerShell has permission to create and write files.
+  before starting PowerShell. The value should name a full path (including
+  filename) that PowerShell has permission to create and write files.
+
+  Changes to this environment variable only affect child processes. See the
+  previous sections for information about creating persistent environment
+  variables.
 
   To disable the file cache, set this value to an invalid location, for
   example:
 
   ```powershell
-  # `NUL` here is a special device on Windows that cannot be written to
+  # `NUL` here is a special device on Windows that can't be written to
   $env:PSModuleAnalysisCachePath = 'NUL'
   ```
 
@@ -386,27 +396,30 @@ The environment variables that store preferences include:
   }
   ```
 
-- **PSDisableModuleAnalysisCacheCleanup**
+- `PSDisableModuleAnalysisCacheCleanup`
 
   When writing out the module analysis cache, PowerShell checks for modules
   that no longer exist to avoid an unnecessarily large cache. Sometimes these
   checks aren't desirable, in which case you can turn them off by setting this
   environment variable value to `1`.
 
-  Setting this environment variable takes effect immediately in the current
-  process.
+  Setting this environment variable takes effect for subsequent cleanup events
+  in the current process. To ensure that cleanup is disabled at startup, you
+  must set the environment variable before starting PowerShell. See the
+  previous sections for information about creating persistent environment
+  variables.
 
 ## Other environment variables used by PowerShell
 
 ### Path information
 
-- **PATH**
+- `PATH`
 
   The `$env:PATH` environment variable contains a list of folder locations that
   the operating system searches for executable files. On Windows, the list of
   folder locations is separated by the semi-colon (`;`) character.
 
-- **PATHEXT**
+- `PATHEXT`
 
   The `$env:PATHEXT` variable contains a list of file extensions that Windows
   considers to be executable files. When a script file with one of the listed
@@ -439,8 +452,8 @@ The environment variables that store preferences include:
 [03]: #powershell-environment-variables
 [04]: about_Environment_Provider.md
 [05]: about_Execution_Policies.md
-[06]: about_preference_variables.md
-[07]: about_profiles.md
+[06]: about_Preference_Variables.md
+[07]: about_Profiles.md
 [08]: about_PSModulePath.md
-[11]: about_variables.md
+[11]: about_Variables.md
 [14]: xref:PowerShellGet.Install-Module

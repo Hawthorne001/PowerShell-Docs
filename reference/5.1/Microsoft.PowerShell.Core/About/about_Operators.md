@@ -1,10 +1,10 @@
 ---
 description: Describes the operators that are supported by PowerShell.
 Locale: en-US
-ms.date: 02/26/2024
+ms.date: 09/03/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Operators
+title: about_Operators
 ---
 # about_Operators
 
@@ -262,17 +262,21 @@ table. For more information, see [about_Hash_Tables][09].
 ### Call operator `&`
 
 Runs a command, script, or script block. The call operator, also known as the
-"invocation operator", lets you run commands that are stored in variables and
+_invocation operator_, lets you run commands that are stored in variables and
 represented by strings or script blocks. The call operator executes in a child
-scope. For more about scopes, see [about_Scopes][19].
+scope. For more about scopes, see [about_Scopes][19]. You can use this to build
+strings containing the command, parameters, and arguments you need, and then
+invoke the string as if it were a command. The strings that you create must
+follow the same parsing rules as a command that you type at the command line.
+For more information, see [about_Parsing][08].
 
 This example stores a command in a string and executes it using the call
 operator.
 
-```
-PS> $c = "get-executionpolicy"
+```powershell
+PS> $c = "Get-ExecutionPolicy"
 PS> $c
-get-executionpolicy
+Get-ExecutionPolicy
 PS> & $c
 AllSigned
 ```
@@ -280,7 +284,7 @@ AllSigned
 The call operator doesn't parse strings. This means that you can't use
 command parameters within a string when you use the call operator.
 
-```
+```powershell
 PS> $c = "Get-Service -Name Spooler"
 PS> $c
 Get-Service -Name Spooler
@@ -299,7 +303,7 @@ At line:1 char:2
 The [Invoke-Expression][25] cmdlet can execute code that causes parsing errors
 when using the call operator.
 
-```
+```powershell
 PS> & "1+1"
 &: The term '1+1' is not recognized as a name of a cmdlet, function, script
 file, or executable program. Check the spelling of the name, or if a path was
@@ -320,7 +324,7 @@ the contents of the quoted string instead of running the script. The call
 operator allows you to execute the contents of the string containing the
 filename.
 
-```
+```powershell
 PS C:\Scripts> Get-ChildItem
 
     Directory: C:\Scripts
@@ -391,15 +395,29 @@ automatic variable `$args` is preserved.
 
 ### Format operator `-f`
 
-Formats strings by using the format method of string objects. Enter the format
-string on the left side of the operator and the objects to be formatted on the
-right side of the operator.
+Provide access to the .NET composite formatting feature. A composite format
+string consists of fixed text intermixed with indexed placeholders, called
+_format items_. These format items correspond to the objects in the list.
+
+Each format item takes the following form and consists of the following
+components:
+
+`{index[,alignment][:formatString]}`
+
+The matching braces (`{` and `}`) are required.
+
+The formatting operation yields a result string that consists of the original
+fixed text intermixed with the string representation of the objects in the
+list. For more information, see [Composite Formatting][02].
+
+Enter the composite format string on the left side of the operator and the
+objects to be formatted on the right side of the operator.
 
 ```powershell
 "{0} {1,-10} {2:N}" -f 1,"hello",[math]::pi
 ```
 
-```output
+```Output
 1 hello      3.14
 ```
 
@@ -411,7 +429,7 @@ formatted string to.
 "{0:00} {1:000} {2:000000}" -f 7, 24, 365
 ```
 
-```output
+```Output
 07 024 000365
 ```
 
@@ -426,9 +444,6 @@ escape them by doubling the curly braces.
 foo vs. {0}
 ```
 
-For more information, see the [String.Format][01] method and
-[Composite Formatting][02].
-
 ### Index operator `[ ]`
 
 Selects objects from indexed collections, such as arrays and hash tables. Array
@@ -439,7 +454,7 @@ value.
 Given a list of indices, the index operator returns a list of members
 corresponding to those indices.
 
-```
+```powershell
 PS> $a = 1, 2, 3
 PS> $a[0]
 1
@@ -460,7 +475,7 @@ $h = @{key="value"; name="PowerShell"; version="2.0"}
 $h["name"]
 ```
 
-```output
+```Output
 PowerShell
 ```
 
@@ -469,7 +484,7 @@ $x = [xml]"<doc><intro>Once upon a time...</intro></doc>"
 $x["doc"]
 ```
 
-```output
+```Output
 intro
 -----
 Once upon a time...
@@ -479,7 +494,7 @@ When an object isn't an indexed collection, using the index operator to access
 the first element returns the object itself. Index values beyond the first
 element return `$null`.
 
-```
+```powershell
 PS> (2)[0]
 2
 PS> (2)[-1]
@@ -562,7 +577,7 @@ expression.
 
 ```powershell
 $myProcess.peakWorkingSet
-(Get-Process PowerShell).kill()
+(Get-Process PowerShell).Kill()
 'OS', 'Platform' | Foreach-Object { $PSVersionTable. $_ }
 ```
 
@@ -596,18 +611,18 @@ properties and methods of an object, use the Static parameter of the
 - [about_Redirection][18]
 
 <!-- link references -->
-[01]: /dotnet/api/system.string.format
 [02]: /dotnet/standard/base-types/composite-formatting
 [03]: /dotnet/standard/base-types/custom-numeric-format-strings#Specifier0
 [04]: /powershell/scripting/learn/glossary#scalar-value
 [05]: about_Arithmetic_Operators.md
 [06]: about_Assignment_Operators.md
 [07]: about_Comparison_Operators.md
+[08]: about_Parsing.md
 [09]: about_Hash_Tables.md
 [12]: about_Join.md
-[13]: about_logical_operators.md
+[13]: about_Logical_Operators.md
 [14]: about_Member-Access_Enumeration.md
-[15]: about_operator_precedence.md
+[15]: about_Operator_Precedence.md
 [18]: about_Redirection.md
 [19]: about_Scopes.md
 [20]: about_Script_Blocks.md

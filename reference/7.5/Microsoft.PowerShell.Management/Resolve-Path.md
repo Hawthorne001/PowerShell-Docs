@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 12/18/2023
+ms.date: 09/25/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/resolve-path?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Resolve-Path
@@ -19,14 +19,14 @@ Resolves the wildcard characters in a path, and displays the path contents.
 
 ```
 Resolve-Path [-Path] <string[]> [-Relative] [-RelativeBasePath <string>]
- [-Credential <pscredential>] [<CommonParameters>]
+ [-Credential <pscredential>] [-Force] [<CommonParameters>]
 ```
 
 ### LiteralPath
 
 ```
 Resolve-Path -LiteralPath <string[]> [-Relative] [-RelativeBasePath <string>]
- [-Credential <pscredential>] [<CommonParameters>]
+ [-Credential <pscredential>] [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -123,6 +123,40 @@ Resolve-Path -Path $ExecutablePath -RelativeBasePath $env:TEMP -Relative
 ..\..\..\..\..\Program Files\PowerShell\7\pwsh.exe
 ```
 
+### Example 8: Resolve paths for hidden items
+
+By default, `Resolve-Path` does not return hidden items. This example uses the **Force** parameter
+to resolve hidden items. The `Get-Item` command confirms that the `.git` folder is hidden. Using
+`Resolve-Path` without the **Force** parameter returns only the visible items. Adding the **Force**
+parameter returns all items, including hidden items.
+
+```powershell
+PS> Get-Item .git -Force
+
+    Directory: D:\Git\PS-Docs\PowerShell-Docs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d--h-           9/25/2024  4:46 PM                .git
+
+PS> Resolve-Path .git*
+
+Path
+----
+D:\Git\PS-Docs\PowerShell-Docs\.github
+D:\Git\PS-Docs\PowerShell-Docs\.gitattributes
+D:\Git\PS-Docs\PowerShell-Docs\.gitignore
+
+PS> Resolve-Path .git* -Force
+
+Path
+----
+D:\Git\PS-Docs\PowerShell-Docs\.git
+D:\Git\PS-Docs\PowerShell-Docs\.github
+D:\Git\PS-Docs\PowerShell-Docs\.gitattributes
+D:\Git\PS-Docs\PowerShell-Docs\.gitignore
+```
+
 ## PARAMETERS
 
 ### -Credential
@@ -146,6 +180,27 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -Force
+
+Allows the cmdlet to get items that otherwise can't be accessed by the user, such as hidden or
+system files. The **Force** parameter doesn't override security restrictions. Implementation varies
+among providers. For more information, see
+[about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
+
+This parameter was added in PowerShell 7.5-preview.5.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -232,7 +287,7 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
 -WarningAction, and -WarningVariable. For more information, see
-[about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -261,7 +316,7 @@ The `*-Path` cmdlets work with the **FileSystem**, **Registry**, and **Certifica
 
 `Resolve-Path` is designed to work with any provider. To list the providers available in your
 session, type `Get-PSProvider`. For more information, see
-[about_providers](../microsoft.powershell.core/about/about_providers.md).
+[about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
 `Resolve-Path` only resolves existing paths. It cannot be used to resolve a location that does not
 exist yet.

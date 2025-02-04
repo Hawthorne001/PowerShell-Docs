@@ -1,14 +1,15 @@
 ---
 description: Explains the concept of scope in PowerShell and shows how to set and change the scope of elements.
 Locale: en-US
-ms.date: 01/26/2024
+ms.date: 02/02/2025
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_scopes?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Scopes
+title: about_Scopes
 ---
 # about_Scopes
 
 ## Short description
+
 Explains the concept of scope in PowerShell and shows how to set and change
 the scope of elements.
 
@@ -32,16 +33,18 @@ The following are the basic rules of scope:
   scopes are child scopes of that parent.
 - An item is visible in the scope that it was created and in any child scopes,
   unless you explicitly make it private.
-- You can declare variables, aliases, functions, and PowerShell drives for a
-  scope outside of the current scope.
+- Using scope modifiers, you can declare variables, aliases, functions, and
+  PowerShell drives for a scope outside of the current scope.
 - An item that you created within a scope can be changed only in the scope in
   which it was created, unless you explicitly specify a different scope.
 - When code running in a runspace references an item, PowerShell searches the
   scope hierarchy, starting with the current scope and proceeding through each
-  parent scope. If the item isn't found, a new item is created in the current
-  scope. If it finds a match, the value of the item is retrieved from the scope
-  where is was found. If you change value, the item copied to the current scope
-  so that the change only affects the current scope.
+  parent scope.
+  - If the item isn't found, a new item is created in the current scope.
+  - If it finds a match, the value of the item is retrieved from the scope
+    where is was found.
+  - If you change the value, the item is copied to the current scope so that
+    the change only affects the current scope.
 - If you explicitly create an item that shares its name with an item in a
   different scope, the original item might be hidden by the new item, but it
   isn't overridden or changed.
@@ -58,7 +61,7 @@ hierarchy of child scopes whose root scope is the global scope.
 > Modules have their own session state that's linked to the scope in which the
 > module was imported. All module code runs in a module-specific hierarchy of
 > scopes that has its own root scope. For more information, see the
-> [Modules][02] section of this article.
+> [Modules][03] section of this article.
 
 When a child scope is created, it includes all the aliases and variables that
 have the **AllScope** option, and some automatic variables. This option is
@@ -88,7 +91,7 @@ When a reference is made to a variable, alias, or function, PowerShell searches
 the current scope. If the item isn't found, the parent scope is searched. This
 search is repeated all they way up to the global scope. If a variable is
 private in a parent scope, the search through continues through the scope
-chain. [Example 4][01] shows the the effect of a private variable in a scope
+chain. [Example 4][02] shows the effect of a private variable in a scope
 search.
 
 ## PowerShell scopes names
@@ -126,14 +129,14 @@ optional scope modifiers:
   current scope.
 
   > [!NOTE]
-  > `private:` isn't a scope. It's an [option][03] that changes the
+  > `private:` isn't a scope. It's an [option][04] that changes the
   > accessibility of an item outside of the scope in which it's defined.
 
 - `script:` - Specifies that the name exists in the **Script** scope.
   **Script** scope is the nearest ancestor script file's scope or **Global** if
   there is no nearest ancestor script file.
 - `using:` - Used to access variables defined in another scope while running
-  scripts via cmdlets like `Start-Job` and `Invoke-Command`.
+  in remote sessions, background jobs, or thread jobs.
 - `workflow:` - Specifies that the name exists within a workflow. Note:
   Workflows aren't supported in PowerShell v6 and higher.
 - `<variable-namespace>` - A modifier created by a PowerShell **PSDrive**
@@ -257,23 +260,40 @@ the following contexts:
   **ComputerName**, **HostName**, **SSHConnection** or **Session** parameters
   (remote session)
 - Background jobs, started with `Start-Job` (out-of-process session)
-- Thread jobs, started via `Start-ThreadJob` or `ForEach-Object -Parallel`
-  (separate thread session)
+- Thread jobs, started via `Start-ThreadJob` (separate thread session)
 
 Depending on the context, embedded variable values are either independent
 copies of the data in the caller's scope or references to it. In remote and
 out-of-process sessions, they're always independent copies.
 
-For more information, see [about_Remote_Variables][07].
+For more information, see [about_Remote_Variables][08].
 
-In thread sessions, they're passed by reference. This means it's possible to
-modify child scope variables in a different thread. To safely modify variables
-requires thread synchronization.
+A `$using:` reference only expands to a variable's value. If you want to change
+the value of a variable in the caller's scope, you must have a reference to the
+variable itself. You can create a reference to a variable by getting the
+**PSVariable** instance of the variable. The following example show how to
+create a reference and make changes in a thread job.
 
-For more information see:
+```powershell
+$Count = 1
+$refOfCount = Get-Variable Count
 
-- [Start-ThreadJob][11]
-- [ForEach-Object][10]
+Start-ThreadJob {
+    ($using:refOfCount).Value = 2
+} | Receive-Job -Wait -AutoRemoveJob
+
+$Count
+```
+
+```Output
+2
+```
+
+> [!NOTE]
+> This is not a thread-safe operation. You can cause data corruption if you try
+> to change the value from multiple threads at the same time. You should use
+> thread-safe data types or synchronization primitives to protect shared data.
+> For more information, see [Thread-Safe collections][01].
 
 ### Serialization of variable values
 
@@ -385,7 +405,7 @@ Using the call operator is no different than running the script by name.
 & c:\scripts\sample.ps1
 ```
 
-You can read more about the call operator in [about_Operators][06].
+You can read more about the call operator in [about_Operators][07].
 
 To run the `Sample.ps1` script in the local scope type a dot and a space (`. `)
 before the path to the script:
@@ -734,21 +754,21 @@ The `using` scope modifier was introduced in PowerShell 3.0.
 
 ## See also
 
-- [about_Variables][09]
-- [about_Environment_Variables][04]
-- [about_Functions][05]
-- [about_Script_Blocks][08]
-- [Start-ThreadJob][11]
+- [about_Environment_Variables][05]
+- [about_Functions][06]
+- [about_Script_Blocks][09]
+- [about_Variables][10]
+- [Start-ThreadJob][12]
 
 <!-- link references -->
-[01]: #example-4-creating-a-private-variable
-[02]: #modules
-[03]: #private-option
-[04]: about_Environment_Variables.md
-[05]: about_Functions.md
-[06]: about_Operators.md
-[07]: about_Remote_Variables.md
-[08]: about_Script_Blocks.md
-[09]: about_Variables.md
-[10]: xref:Microsoft.PowerShell.Core.ForEach-Object
-[11]: xref:ThreadJob.Start-ThreadJob
+[01]: /dotnet/standard/collections/thread-safe/
+[02]: #example-4-creating-a-private-variable
+[03]: #modules
+[04]: #private-option
+[05]: about_Environment_Variables.md
+[06]: about_Functions.md
+[07]: about_Operators.md
+[08]: about_Remote_Variables.md
+[09]: about_Script_Blocks.md
+[10]: about_Variables.md
+[12]: xref:ThreadJob.Start-ThreadJob

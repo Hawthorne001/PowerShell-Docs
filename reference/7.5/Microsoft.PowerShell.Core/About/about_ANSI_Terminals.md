@@ -1,13 +1,14 @@
 ---
 description: Describes the features of PowerShell that use ANSI escape sequences and the terminal hosts that support them.
 Locale: en-US
-ms.date: 09/29/2023
+ms.date: 08/27/2024
 schema: 2.0.0
-title: about ANSI terminals
+title: about_ANSI_terminals
 ---
 # about_ANSI_Terminals
 
 ## Short description
+
 Describes the support available for ANSI escape sequences in PowerShell.
 
 ## Long description
@@ -144,8 +145,8 @@ The following members control how or when ANSI formatting is used:
   - **Verbose** - formatting for verbose messages
   - **Debug** - formatting for debug messages
   - **TableHeader** - formatting for table headers
-  - **CustomTableHeaderLabel** - formatting for table headers that are
-    calculated values
+  - **CustomTableHeaderLabel** - formatting for table headers that are not
+    actually properties on the object
   - **FeedbackName** - formatting for the feedback provider name (added as an
     experimental feature in PowerShell 7.4)
   - **FeedbackText** - formatting for feedback messages (added as an
@@ -229,7 +230,7 @@ in the `bash` process, outside of the PowerShell host, the output isn't
 affected by **OutputRendering**.
 
 ```bash
-pwsh -noprofile -command 'Get-Childitem' > out.txt
+pwsh -noprofile -command 'Get-ChildItem' > out.txt
 ```
 
 When you inspect the contents of `out.txt` you see the ANSI escape sequences.
@@ -238,7 +239,7 @@ By contrast, when redirection occurs within the PowerShell session,
 **OutputRendering** affects the redirected output.
 
 ```bash
-pwsh -noprofile -command 'Get-Childitem > out.txt'
+pwsh -noprofile -command 'Get-ChildItem > out.txt'
 ```
 
 When you inspect the contents of `out.txt` there are no ANSI escape sequences.
@@ -252,7 +253,7 @@ The following values of `$env:TERM` change the behavior as follows:
 
 - `dumb` - sets `$Host.UI.SupportsVirtualTerminal = $false`
 - `xterm-mono` - sets `$PSStyle.OutputRendering = PlainText`
-- `xtermm` - sets `$PSStyle.OutputRendering = PlainText`
+- `xterm` - sets `$PSStyle.OutputRendering = PlainText`
 
 If `$env:NO_COLOR` exists, then `$PSStyle.OutputRendering` is set to
 **PlainText**. For more information about the **NO_COLOR** environment

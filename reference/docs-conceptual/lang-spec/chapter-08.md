@@ -5,6 +5,8 @@ title: Statements
 ---
 # 8. Statements
 
+[!INCLUDE [Disclaimer](../../includes/language-spec.md)]
+
 ## 8.1 Statement blocks and lists
 
 Syntax:
@@ -1559,7 +1561,7 @@ inlinescript-statement:
 The inlinescript statement contains zero or more statements that are executed in an implementation
 defined manner.
 
-A inlinescript statement is only allowed in a workflow ([§8.10.2][§8.10.2]).
+An inlinescript statement is only allowed in a workflow ([§8.10.2][§8.10.2]).
 
 ## 8.14 Parameter binding
 

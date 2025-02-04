@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 02/14/2023
+ms.date: 11/04/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/copy-item?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Copy-Item
@@ -90,7 +90,7 @@ Copy-Item -Path "C:\Logfiles\*" -Destination "C:\Drawings" -Recurse
 
 > [!NOTE]
 > If the path `C:\Drawings` doesn't exist the cmdlet copies all the files from the `Logfiles`
-> folder into a single file `C:\Drawings`.
+> folder tree into a single folder `C:\Drawings`, overwriting any files with the same name.
 
 ### Example 3: Copy directory and contents to a new directory
 
@@ -118,7 +118,11 @@ operation, the command changes the item name from `Get-Widget.ps1` to `Get-Widge
 can be safely attached to email messages.
 
 ```powershell
-Copy-Item "\\Server01\Share\Get-Widget.ps1" -Destination "\\Server12\ScriptArchive\Get-Widget.ps1.txt"
+$copyParams = @{
+    Path        = "\\Server01\Share\Get-Widget.ps1"
+    Destination = "\\Server12\ScriptArchive\Get-Widget.ps1.txt"
+}
+Copy-Item @copyParams
 ```
 
 ### Example 5: Copy a file to a remote computer
@@ -176,7 +180,12 @@ The `Copy-Item` cmdlet copies `scriptingexample.ps1` from the `D:\Folder004` fol
 
 ```powershell
 $Session = New-PSSession -ComputerName "Server04" -Credential "Contoso\User01"
-Copy-Item "D:\Folder004\scriptingexample.ps1" -Destination "C:\Folder004_Copy\scriptingexample_copy.ps1" -ToSession $Session
+$copyParams = @{
+    Path        = "D:\Folder004\scriptingexample.ps1"
+    Destination = "C:\Folder004_Copy\scriptingexample_copy.ps1"
+    ToSession   = $Session
+}
+Copy-Item @copyParams
 ```
 
 ### Example 9: Copy a remote file to the local computer
@@ -221,7 +230,13 @@ copied with their file trees intact.
 
 ```powershell
 $Session = New-PSSession -ComputerName "Server01" -Credential "Contoso\User01"
-Copy-Item "C:\MyRemoteData\scripts" -Destination "D:\MyLocalData\scripts" -FromSession $Session -Recurse
+$copyParams = @{
+    Path        = "C:\MyRemoteData\scripts"
+    Destination = "D:\MyLocalData\scripts"
+    FromSession = $Session
+    Recurse     = $true
+}
+Copy-Item @copyParams
 ```
 
 ### Example 12: Recursively copy files from a folder tree into the current folder
@@ -536,7 +551,8 @@ typed. No characters are interpreted as wildcards. If the path includes escape c
 it in single quotation marks. Single quotation marks tell PowerShell not to interpret any characters
 as escape sequences.
 
-For more information, see [about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
+For more information, see
+[about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
 
 ```yaml
 Type: System.String[]

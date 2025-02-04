@@ -1,10 +1,10 @@
 ---
 description: Describes how functions that specify the `CmdletBinding` attribute can use the methods and properties that are available to compiled cmdlets.
 Locale: en-US
-ms.date: 03/12/2024
+ms.date: 10/16/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_functions_advanced_methods?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Functions Advanced Methods
+title: about_Functions_Advanced_Methods
 ---
 
 # about_Functions_Advanced_Methods
@@ -55,10 +55,11 @@ processing, and an `end` block for one-time post-processing.
 Function Test-ScriptCmdlet
 {
 [CmdletBinding(SupportsShouldProcess=$True)]
-    Param ($Parameter1)
+    param ($Parameter1)
     begin{}
     process{}
     end{}
+    clean{}
 }
 ```
 
@@ -120,7 +121,7 @@ function Get-SumOfNumbers {
     end { $retValue }
 }
 
-PS> Get-SumOfNumbers 1,2,3,4
+PS> Get-SumOfNumbers 1, 2, 3, 4
 10
 PS> 1,2,3,4 | Get-SumOfNumbers
 10
@@ -145,6 +146,8 @@ script cmdlet. Resource cleanup is enforced for the following scenarios:
 1. when the pipeline is halted by `Select-Object -First`
 1. when the pipeline is being stopped by <kbd>Ctrl+c</kbd> or
    `StopProcessing()`
+
+The clean block discards any output that's written to the **Success** stream.
 
 > [!CAUTION]
 > Adding the `clean` block is a breaking change. Because `clean` is parsed as a

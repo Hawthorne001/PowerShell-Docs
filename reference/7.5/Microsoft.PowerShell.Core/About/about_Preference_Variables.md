@@ -1,10 +1,10 @@
 ---
 description: Variables that customize the behavior of PowerShell.
 Locale: en-US
-ms.date: 01/04/2024
+ms.date: 04/06/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Preference Variables
+title: about_Preference_Variables
 ---
 # about_Preference_Variables
 
@@ -60,13 +60,14 @@ PowerShell includes the following environment variables that store user
 preferences. For more information about these environment variables, see
 [about_Environment_Variables][30].
 
-- `env:PSExecutionPolicyPreference`
+- `$env:PSExecutionPolicyPreference`
 - `$env:PSModulePath`
 
 > [!NOTE]
-> Changes to preference variable only take effect in scripts and functions if
-> those scripts or functions are defined in the same scope as the scope in
-> which preference was used. For more information, see [about_Scopes][40].
+> Changes to preference variables apply only in the scope they are made
+> and any child scopes thereof. For example, you can limit the effects of
+> changing a preference variable to a single function or script. For more
+> information, see [about_Scopes][40].
 
 ## Working with preference variables
 
@@ -117,7 +118,8 @@ enumeration values: **High**, **Medium**, **Low**, or **None**.
 Cmdlets and functions are assigned a risk of **High**, **Medium**, or **Low**.
 When the value of the `$ConfirmPreference` variable is less than or equal to
 the risk assigned to a cmdlet or function, PowerShell automatically prompts you
-for confirmation before running the cmdlet or function.
+for confirmation before running the cmdlet or function. For more information
+about assigning a risk to cmdlets or functions, see [about_Functions_CmdletBindingAttribute][66].
 
 If the value of the `$ConfirmPreference` variable is **None**, PowerShell never
 automatically prompts you before running a cmdlet or function.
@@ -165,11 +167,11 @@ Cmdlets and functions that might pose a risk to the system have a **Confirm**
 parameter that you can use to request or suppress confirmation for a single
 command.
 
-Because most cmdlets and functions use the default risk value,
-**ConfirmImpact**, of **Medium**, and the default value of `$ConfirmPreference`
-is **High**, automatic confirmation rarely occurs. However, you can activate
-automatic confirmation by changing the value of `$ConfirmPreference` to
-**Medium** or **Low**.
+Most cmdlets and functions keep the default value of **Medium** for **ConfirmImpact**.
+`$ConfirmPreference` is set to **High** by default. Therefore, it's rare that commands
+automatically prompt for confirmation when users don't specify the **Confirm** parameter.
+To extend automatic confirmation prompting to more cmdlets and functions, set the value
+of `$ConfirmPreference` to **Medium** or **Low**.
 
 ### Examples
 
@@ -248,15 +250,19 @@ debugging messages for a specific command. For more information, see
 
 The valid values are as follows:
 
+- **Break** - Enter the debugger when an error occurs or when an exception is
+  raised.
 - **Stop**: Displays the debug message and stops executing. Writes an error to
   the console.
 - **Inquire**: Displays the debug message and asks you whether you want to
-  continue. Adding the **Debug** common parameter to a command, when the
-  command is configured to generate a debugging message, changes the value of
-  the `$DebugPreference` variable to **Inquire**.
+  continue.
 - **Continue**: Displays the debug message and continues with execution.
 - **SilentlyContinue**: (Default) No effect. The debug message isn't displayed
   and execution continues without interruption.
+
+Adding the **Debug** common parameter to a command, when the command is
+configured to generate a debugging message, changes the value of the
+`$DebugPreference` variable to **Continue**.
 
 ### Examples
 
@@ -474,7 +480,7 @@ the extra object generated to the `$Error` variable.
 ```powershell
 # Change the ErrorActionPreference to 'Stop'
 $ErrorActionPreference = 'Stop'
-# Error message is is generated and script stops processing
+# Error message is generated and script stops processing
 Write-Error -Message 'Test Error' ; Write-Host 'Hello World'
 
 # Show the ActionPreferenceStopException and the error generated
@@ -741,13 +747,12 @@ The `$InformationPreference` variable takes one of the
 
 The valid values are as follows:
 
+- **Break** - Enter the debugger when you write to the Information stream.
 - **Stop**: Stops a command or script at an occurrence of the
   `Write-Information` command.
 - **Inquire**: Displays the informational message that you specify in a
   `Write-Information` command, then asks whether you want to continue.
 - **Continue**: Displays the informational message, and continues running.
-- **Suspend** is only available for workflows which aren't supported in
-  PowerShell 6 and beyond.
 - **SilentlyContinue**: (Default) No effect. The informational messages aren't
   displayed, and the script continues without interruption.
 
@@ -955,6 +960,7 @@ enumeration values: **SilentlyContinue**, **Stop**, **Continue**, **Inquire**,
 
 The valid values are as follows:
 
+- **Break** - Enter the debugger when you write to the Progress stream.
 - **Stop**: Doesn't display the progress bar. Instead, it displays an error
   message and stops executing.
 - **Inquire**: Doesn't display the progress bar. Prompts for permission to
@@ -1254,6 +1260,7 @@ enumeration values: **SilentlyContinue**, **Stop**, **Continue**, **Inquire**,
 
 The valid values are as follows:
 
+- **Break** - Enter the debugger when you write to the Verbose stream.
 - **Stop**: Displays the verbose message and an error message and then stops
   executing.
 - **Inquire**: Displays the verbose message and then displays a prompt that
@@ -1373,6 +1380,7 @@ enumeration values: **SilentlyContinue**, **Stop**, **Continue**, **Inquire**,
 
 The valid values are as follows:
 
+- **Break** - Enter the debugger when a warning message is written.
 - **Stop**: Displays the warning message and an error message and then stops
   executing.
 - **Inquire**: Displays the warning message and then prompts for permission to
@@ -1752,3 +1760,4 @@ At line:1 char:1
 [63]: xref:System.Text.UTF32Encoding
 [64]: xref:System.Text.UTF7Encoding
 [65]: xref:System.Text.UTF8Encoding
+[66]: about_Functions_CmdletBindingAttribute.md

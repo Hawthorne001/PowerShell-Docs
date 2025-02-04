@@ -2,14 +2,15 @@
 description: Describes the operators that work with Microsoft .NET types.
 Locale: en-US
 ms.date: 08/29/2022
-online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_type_operators?view=powershell-7.5&WT.mc_id=ps-gethelp
 no-loc: [-as]
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_type_operators?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Type Operators
+title: about_Type_Operators
 ---
 # about_Type_Operators
 
 ## Short description
+
 Describes the operators that work with Microsoft .NET types.
 
 ## Long description
@@ -29,13 +30,13 @@ PowerShell has the  following type operators:
 - `-is`   |Returns TRUE when the input is an instance of the specified .NET type.
 
   ```powershell
-  (get-date) -is [DateTime]     # Result is True
+  (Get-Date) -is [DateTime]     # Result is True
   ```
 
 - `-isnot`|Returns TRUE when the input not an instance of the specified.NET type.
 
   ```powershell
-  (get-date) -isnot [DateTime]  # Result is False
+  (Get-Date) -isnot [DateTime]  # Result is False
   ```
 
 - `-as`   |Converts the input to the   specified .NET type.
@@ -154,7 +155,7 @@ False
 PS> 32 -is "int"
 True
 
-PS> (get-date) -is [DateTime]
+PS> (Get-Date) -is [DateTime]
 True
 
 PS> "12/31/2007" -is [DateTime]
@@ -179,25 +180,25 @@ return **System.Globalization.CultureInfo** objects, a collection of these
 objects is a System.Object array.
 
 ```powershell
-PS> (get-culture) -is [System.Globalization.CultureInfo]
+PS> (Get-Culture) -is [System.Globalization.CultureInfo]
 True
 
-PS> (get-uiculture) -is [System.Globalization.CultureInfo]
+PS> (Get-UICulture) -is [System.Globalization.CultureInfo]
 True
 
-PS> (get-culture), (get-uiculture) -is [System.Globalization.CultureInfo]
+PS> (Get-Culture), (Get-UICulture) -is [System.Globalization.CultureInfo]
 False
 
-PS> (get-culture), (get-uiculture) -is [Array]
+PS> (Get-Culture), (Get-UICulture) -is [Array]
 True
 
-PS> (get-culture), (get-uiculture) | foreach {
+PS> (Get-Culture), (Get-UICulture) | foreach {
   $_ -is [System.Globalization.CultureInfo])
 }
 True
 True
 
-PS> (get-culture), (get-uiculture) -is [Object]
+PS> (Get-Culture), (Get-UICulture) -is [Object]
 True
 ```
 

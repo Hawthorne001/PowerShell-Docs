@@ -4,11 +4,12 @@ Locale: en-US
 ms.date: 01/19/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_assignment_operators?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Assignment Operators
+title: about_Assignment_Operators
 ---
 # about_Assignment_Operators
 
 ## Short description
+
 Describes how to use operators to assign values to variables.
 
 ## Long description
@@ -198,7 +199,7 @@ $a += 2
 $a
 ```
 
-```
+```Output
 6
 ```
 
@@ -645,9 +646,7 @@ $x
 100
 ```
 
-For more information, see
-[Null-coalescing operator][04].
-
+For more information, see [Null-coalescing operator][04].
 
 ## Microsoft .NET types
 
@@ -885,7 +884,7 @@ Set-Variable -Name a -Value 1, 2, 3
 [01]: /powershell/scripting/learn/glossary#scalar-value
 [02]: about_Arrays.md
 [03]: about_Hash_Tables.md
-[04]: about_operators.md#null-coalescing-operator-
+[04]: about_Operators.md#null-coalescing-operator-
 [05]: about_Variables.md
 [06]: xref:Microsoft.PowerShell.Management.Clear-Item
 [07]: xref:Microsoft.PowerShell.Utility.Clear-Variable

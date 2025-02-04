@@ -45,7 +45,7 @@ help files can be downloaded and installed from the internet or a file share.
 
 Without parameters, `Update-Help` updates the help files for modules that support updateable help
 and are loaded in the session or installed in a location included in the `$env:PSModulePath`. For
-more information, see [about_Updatable_Help](./About/about_Updatable_Help.md).
+more information, see [about_Updatable_Help](About/about_Updatable_Help.md).
 
 `Update-Help` checks the version of the help installed. If `Update-Help` can't find updated help
 files for a module it continues silently without displaying an error message. Use the **Force**
@@ -206,10 +206,10 @@ foreach ($mModule in $Modules)
 {
     $mDir = $mModule.ModuleBase
 
-    if (Test-Path $mdir\*helpinfo.xml)
+    if (Test-Path $mDir\*helpinfo.xml)
     {
         $mName=$mModule.Name
-        $mNodes = dir $mdir\*helpinfo.xml -ErrorAction SilentlyContinue |
+        $mNodes = dir $mDir\*helpinfo.xml -ErrorAction SilentlyContinue |
             Select-Xml -Namespace $HelpInfoNamespace -XPath "//helpInfo:UICulture"
         foreach ($mNode in $mNodes)
         {
@@ -447,7 +447,7 @@ you've used the `Save-Help` cmdlet to download updated help files to a directory
 To specify a default value for **SourcePath**, go to **Group Policy**, **Computer Configuration**,
 and **Set the default source path for Update-Help**. This Group Policy setting prevents users from
 using `Update-Help` to download help files from the internet.
-For more information, see [about_Group_Policy_Settings](./About/about_Group_Policy_Settings.md).
+For more information, see [about_Group_Policy_Settings](About/about_Group_Policy_Settings.md).
 
 ```yaml
 Type: System.String[]

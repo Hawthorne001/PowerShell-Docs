@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 03/14/2024
+ms.date: 07/24/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/test-json?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Test-Json
@@ -140,7 +140,12 @@ $schema = @'
 ```
 
 ```Output
-Test-Json: The JSON is not valid with the schema: Value is "string" but should be "integer" at '/age'
+Test-Json:
+Line |
+  35 |  '{"name": "Ashley", "age": "25"}' | Test-Json -Schema $schema
+     |                                      ~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The JSON is not valid with the schema: Value is "string" but should be "integer" at '/age'
+False
 ```
 
 In this example, we get an error because the schema expects an integer for **age** but the JSON
@@ -221,7 +226,7 @@ Parameter Sets: JsonString, JsonStringWithSchemaString, JsonStringWithSchemaFile
 Aliases:
 
 Required: True
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
@@ -242,9 +247,9 @@ Parameter Sets: JsonLiteralPath, JsonLiteralPathWithSchemaString, JsonLiteralPat
 Aliases: PSPath, LP
 
 Required: True
-Position: Named
+Position: 0
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -261,9 +266,9 @@ Parameter Sets: JsonPath, JsonPathWithSchemaString, JsonPathWithSchemaFile
 Aliases:
 
 Required: True
-Position: Named
+Position: 0
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: True
 ```
 
@@ -280,8 +285,8 @@ Type: System.String
 Parameter Sets: JsonStringWithSchemaString, JsonLiteralPathWithSchemaString, JsonPathWithSchemaString
 Aliases:
 
-Required: False
-Position: 2
+Required: True
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -300,8 +305,8 @@ Type: System.String
 Parameter Sets: JsonStringWithSchemaFile, JsonLiteralPathWithSchemaFile, JsonPathWithSchemaFile
 Aliases:
 
-Required: False
-Position: Named
+Required: True
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

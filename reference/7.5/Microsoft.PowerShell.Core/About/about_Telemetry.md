@@ -1,10 +1,10 @@
 ---
 description: Describes the telemetry collected in PowerShell and how to opt-out.
 Locale: en-US
-ms.date: 10/25/2023
+ms.date: 09/24/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_telemetry?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Telemetry
+title: about_Telemetry
 ---
 # about_Telemetry
 
@@ -51,12 +51,21 @@ PowerShell sends the following information during the session:
 - Value of `$PSNativeCommandUseErrorActionPreference` preference variable,
   either `true`, `false` or `unset`
 - The count of remote session open operations
+- The names of registered subsystems: `Completion` and `general`. If the name
+  of the subsystem name not one of those, then `anonymous` is submitted as the
+  name.
+- The count of `CommandNotFound` feedback suggestions provided.
+- The count of `PowerShellUnsafeAssemblyLoad` usage and whether the load was
+  successful or not.
 
 PowerShell sends this information periodically during the lifetime of the
 session for all host applications.
 
 To opt-out of this telemetry, set the environment variable
-`$env:POWERSHELL_TELEMETRY_OPTOUT` to `true`, `yes`, or `1`.
+`$env:POWERSHELL_TELEMETRY_OPTOUT` to `true`, `yes`, or `1`. For this
+environment variable to have effect, it must be set before starting the
+PowerShell process. For more information, see
+[about_Environment_Variables][01].
 
 The `$env:POWERSHELL_DISTRIBUTION_CHANNEL` environment variable is set by the
 installer packages to record the method and source of installation for
@@ -70,6 +79,6 @@ For more information about Microsoft's statement on privacy, see
 [Microsoft Privacy Statement][03]
 
 <!-- link references -->
-[01]: about_environment_variables.md#powershell-environment-variables
+[01]: about_Environment_Variables.md#powershell-environment-variables
 [02]: /azure/azure-monitor/app/ip-collection?tabs=net
 [03]: https://privacy.microsoft.com/privacystatement

@@ -90,7 +90,7 @@ This command creates a directory named "Logfiles" in the `C:` drive. The **ItemT
 specifies that the new item is a directory, not a file or other file system object.
 
 ```powershell
-New-Item -Path "c:\" -Name "logfiles" -ItemType "directory"
+New-Item -Path "c:\" -Name "Logfiles" -ItemType "directory"
 ```
 
 ### Example 3: Create a profile
@@ -108,7 +108,8 @@ profile path, even when the directories in the path do not exist.
 After you create a profile, you can enter aliases, functions, and scripts in the profile to
 customize your shell.
 
-For more information, see [about_Automatic_Variables](../Microsoft.PowerShell.Core/About/about_Automatic_Variables.md)
+For more information, see
+[about_Automatic_Variables](../Microsoft.PowerShell.Core/About/about_Automatic_Variables.md)
 and [about_Profiles](../Microsoft.PowerShell.Core/About/about_Profiles.md).
 
 ```powershell
@@ -218,10 +219,10 @@ Mode                LastWriteTime         Length Name
 -a----         5/1/2020   8:03 AM              0 TestFile.txt
 ```
 
-### Example 9: Use the -Force parameter to overwrite existing files
+### Example 9: Use the Force parameter to overwrite existing files
 
-This example creates a file with a value and then recreates the file using `-Force`. This overwrites
-the existing file, as you can see by the length property.
+This example creates a file with a value and then recreates the file using the **Force** parameter.
+This overwrites the existing file, as you can see by the length property.
 
 ```powershell
 PS> New-Item ./TestFile.txt -ItemType File -Value 'This is just a test file'
@@ -240,9 +241,9 @@ Mode                LastWriteTime         Length Name
 ```
 
 > [!NOTE]
-> When using `New-Item` with the `-Force` switch to create registry keys, the command will behave
+> When using `New-Item` with the **Force** parameter to create registry keys, the command behaves
 > the same as when overwriting a file. If the registry key already exists, the key and all
-> properties and values will be overwritten with an empty registry key.
+> properties and values are overwritten with an empty registry key.
 
 ## PARAMETERS
 
@@ -378,11 +379,11 @@ on the current provider you are using.
 
 If your location is in a `FileSystem` drive, the following values are allowed:
 
-- File
-- Directory
-- SymbolicLink
-- Junction
-- HardLink
+- `File`
+- `Directory`
+- `SymbolicLink`
+- `Junction`
+- `HardLink`
 
 > [!NOTE]
 > Creating a `SymbolicLink` type on Windows requires elevation as administrator. However, Windows 10
@@ -391,10 +392,10 @@ If your location is in a `FileSystem` drive, the following values are allowed:
 
 In a `Certificate` drive, these are the values you can specify:
 
-- Certificate Provider
-- Certificate
-- Store
-- StoreLocation
+- `Certificate Provider`
+- `Certificate`
+- `Store`
+- `StoreLocation`
 
 For more information see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
@@ -643,7 +644,7 @@ The cmdlet returns a **FileInfo** object when creating a new file in the filesys
 
 ### System.Management.Automation.AliasInfo
 
-The cmdlet returns a **AliasInfo** object when creating a new alias.
+The cmdlet returns an **AliasInfo** object when creating a new alias.
 
 ### System.Management.Automation.FunctionInfo
 

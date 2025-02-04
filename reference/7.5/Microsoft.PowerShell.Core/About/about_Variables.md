@@ -1,10 +1,10 @@
 ---
 description: Describes how variables store values that can be used in PowerShell.
 Locale: en-US
-ms.date: 03/07/2024
+ms.date: 01/02/2025
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_variables?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about Variables
+title: about_Variables
 ---
 
 # about_Variables
@@ -321,15 +321,16 @@ Alphanumeric variable names can contain these characters:
 - Underscore (`_`) character.
 - Question mark (`?`) character.
 
-The following list contains the Unicode category descriptions. For more
-information, see [UnicodeCategory][17].
+The following list contains the .NET names of the Unicode categories with a
+description. For more information, see [UnicodeCategory][17].
 
-- **Lu** - UppercaseLetter
-- **Ll** - LowercaseLetter
-- **Lt** - TitlecaseLetter
-- **Lm** - ModifierLetter
-- **Lo** - OtherLetter
-- **Nd** - DecimalDigitNumber
+- **Lu** - UppercaseLetter - an uppercase letter
+- **Ll** - LowercaseLetter - a lowercase letter
+- **Lt** - TitlecaseLetter - a digraph encoded as a single character with the
+  first part uppercase
+- **Lm** - ModifierLetter - a modifier letter
+- **Lo** - OtherLetter - other letters, including syllables and ideographs
+- **Nd** - DecimalDigitNumber - a decimal digit
 
 To create or display a variable name that includes spaces or special
 characters, enclose the variable name with the curly braces (`{}`) characters.
@@ -514,7 +515,7 @@ Get-Help <cmdlet-name>
 <!-- link references -->
 [01]: #variable-names-that-include-special-characters
 [02]: about_Alias_Provider.md
-[03]: about_assignment_operators.md#assigning-multiple-variables
+[03]: about_Assignment_Operators.md#assigning-multiple-variables
 [04]: about_Automatic_Variables.md
 [05]: about_Environment_Provider.md
 [06]: about_Environment_Variables.md

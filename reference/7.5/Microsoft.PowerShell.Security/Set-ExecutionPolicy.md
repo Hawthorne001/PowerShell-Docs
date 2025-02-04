@@ -25,7 +25,8 @@ Set-ExecutionPolicy [-ExecutionPolicy] <ExecutionPolicy> [[-Scope] <ExecutionPol
 ## DESCRIPTION
 
 The `Set-ExecutionPolicy` cmdlet changes PowerShell execution policies for Windows computers. For
-more information, see [about_Execution_Policies](../Microsoft.PowerShell.Core/about/about_Execution_Policies.md).
+more information, see
+[about_Execution_Policies](../Microsoft.PowerShell.Core/about/about_Execution_Policies.md).
 
 Beginning in PowerShell 6.0 for non-Windows computers, the default execution policy is
 `Unrestricted` and can't be changed. The `Set-ExecutionPolicy` cmdlet is available, but PowerShell
@@ -235,7 +236,7 @@ policy. The policy is set for the default scope, `LocalMachine`.
 The `Get-ExecutionPolicy` cmdlet shows that `RemoteSigned` is the effective execution policy for
 the current PowerShell session.
 
-The `Start-ActivityTracker.ps1 script is executed from the current directory. The script is blocked
+The `Start-ActivityTracker.ps1` script is executed from the current directory. The script is blocked
 by `RemoteSigned` because the script isn't digitally signed.
 
 For this example, the script's code was reviewed and verified as safe to run. The `Unblock-File`
